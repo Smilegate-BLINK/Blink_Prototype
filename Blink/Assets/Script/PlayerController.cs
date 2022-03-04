@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Script.Item;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -106,6 +108,16 @@ public class PlayerController : MonoBehaviour
                 myRigid.velocity = new Vector2(-movePos.x, movePos.y) * bounceForce;
             else
                 myRigid.velocity = new Vector2(movePos.x, -movePos.y) * bounceForce;
+        }
+    }
+    
+    //아이템 충돌 실행 함수
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        IItem item = other.GetComponent<IItem>();
+        if (item != null)
+        {
+            item.Use(gameObject);
         }
     }
 }
