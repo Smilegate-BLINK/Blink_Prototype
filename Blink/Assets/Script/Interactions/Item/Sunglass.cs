@@ -14,7 +14,6 @@ namespace Script.Item
 
         public void Use(GameObject target)
         {
-            UIManager.instance.EnableSunglass();
             Destroy(gameObject);
         }
     }
