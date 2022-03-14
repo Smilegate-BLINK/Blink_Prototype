@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    private WorldController myWorld;
+
     private Vector3 camPos;
     private Vector2 playerPos;
     private float xScreenHalfSize;
@@ -15,6 +17,7 @@ public class CameraController : MonoBehaviour
 
     private void Awake()
     {
+        myWorld = GameObject.Find("World").GetComponent<WorldController>();
         myCamera = GetComponent<Camera>();
         myPlayer = GameObject.Find("Player").GetComponent<Transform>();
     }
@@ -33,6 +36,7 @@ public class CameraController : MonoBehaviour
     private void LateUpdate()
     {
         moveCamera();
+        changeBackGround();
     }
 
     private void moveCamera()
@@ -50,5 +54,18 @@ public class CameraController : MonoBehaviour
         else if (playerPos.y - camPos.y < -yScreenHalfSize)
             camPos += new Vector3(0, -yScreenHalfSize * 2, camearDepth);
         myCamera.transform.position = camPos;
+    }
+
+    private void changeBackGround()
+    {
+        if (myWorld.doBlinkFunc)
+        {
+            if (myWorld.getWorldBlackOut())
+                myCamera.backgroundColor = Color.black;
+            else
+                myCamera.backgroundColor = Color.white;
+        }
+        else
+            myCamera.backgroundColor = Color.black;
     }
 }
