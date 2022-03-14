@@ -10,6 +10,8 @@ public class WorldController : MonoBehaviour
     // true시 암전
     private bool worldBlackOut;
 
+    [Header("눈 감기 매커니즘 실행 여부")]
+    public bool doBlinkFunc = false;
     [SerializeField, Header("맵의 발판들이 흐려지기 시작하는 시간")]
     private float startshadedTime = 1f;
     [SerializeField, Header("맵의 발판들이 완전히 흐려지는데 걸리는 시간")]

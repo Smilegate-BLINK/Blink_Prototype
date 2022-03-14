@@ -58,9 +58,14 @@ public class CameraController : MonoBehaviour
 
     private void changeBackGround()
     {
-        if (myWorld.getWorldBlackOut())
-            myCamera.backgroundColor = Color.black;
+        if (myWorld.doBlinkFunc)
+        {
+            if (myWorld.getWorldBlackOut())
+                myCamera.backgroundColor = Color.black;
+            else
+                myCamera.backgroundColor = Color.white;
+        }
         else
-            myCamera.backgroundColor = Color.white;
+            myCamera.backgroundColor = Color.black;
     }
 }

@@ -29,20 +29,25 @@ public class GroundController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // 눈이 감겨있으면
-        if (myWorld.getWorldBlackOut())
+        if (myWorld.doBlinkFunc)
         {
-            mySprite.color = eyeClosedColor;
-            time += Time.deltaTime;
-            if (time > shadedTimeTaken + startshadedTime)
-                mySprite.color = eyeOpendColor;
-            else if (time > startshadedTime)
-                mySprite.color = Color.Lerp(eyeClosedColor, eyeOpendColor, (time - startshadedTime) / shadedTimeTaken);
-        }   
+            // 눈이 감겨있으면
+            if (myWorld.getWorldBlackOut())
+            {
+                mySprite.color = eyeClosedColor;
+                time += Time.deltaTime;
+                if (time > shadedTimeTaken + startshadedTime)
+                    mySprite.color = eyeOpendColor;
+                else if (time > startshadedTime)
+                    mySprite.color = Color.Lerp(eyeClosedColor, eyeOpendColor, (time - startshadedTime) / shadedTimeTaken);
+            }
+            else
+            {
+                mySprite.color = Color.Lerp(eyeOpendColor, eyeClosedColor, time / 0.5f);
+                time = 0f;
+            }
+        }
         else
-        {
-            mySprite.color = eyeOpendColor;
-            time = 0f;
-        }   
+            mySprite.color = eyeClosedColor;
     }
 }

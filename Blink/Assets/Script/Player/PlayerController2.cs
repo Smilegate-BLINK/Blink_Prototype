@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerController2 : MonoBehaviour
 {
-
     private Rigidbody2D rigidbody2d;
     private GroundCheck myGround;
     private WallCheck myWall;
@@ -12,11 +11,9 @@ public class PlayerController2 : MonoBehaviour
     [Header("이동속도")]
     public float speed = 6f;
     [Header("점프력")]
-    public float jumpForce = 24;
+    public float jumpForce = 12f;
     [Header("버튼 누름에 따른 점프력 차이")]
     public float jumpDiff = 0.6f;
-
-    private float fixedHor, savedHor;
 
     // Start is called before the first frame update
     void Start()
@@ -30,7 +27,6 @@ public class PlayerController2 : MonoBehaviour
     private void Update()
     {
         Move();
-        //Blink();
     }
 
     private void Move()
@@ -38,29 +34,25 @@ public class PlayerController2 : MonoBehaviour
         float horizontal;
 
         horizontal = Input.GetAxis("Horizontal");
-        GetFixedHor(horizontal);
+        DoWallJump(horizontal);
         if (myGround.isGrounded && Input.GetButtonDown("Jump"))
         {
-            rigidbody2d.velocity = new Vector2(rigidbody2d.velocity.x, jumpForce);
-            savedHor = horizontal;
+            rigidbody2d.AddForce(new Vector2(rigidbody2d.velocity.x, jumpForce), ForceMode2D.Impulse);
         }
         if (Input.GetButtonUp("Jump") && rigidbody2d.velocity.y > 0.0f)
             rigidbody2d.velocity = (new Vector2(rigidbody2d.velocity.x, rigidbody2d.velocity.y * jumpDiff));
-        rigidbody2d.velocity = new Vector2(fixedHor * speed, rigidbody2d.velocity.y);
+        if (myGround.isGrounded)
+            rigidbody2d.velocity = new Vector2(horizontal * speed, rigidbody2d.velocity.y);
     }
 
-    private void GetFixedHor(float horizontal)
+    private void DoWallJump(float horizontal)
     {
-        fixedHor = horizontal;
-        if (myGround.isGrounded)
-            savedHor = horizontal;
-        if (!myGround.isGrounded)
-            fixedHor = savedHor;
-        if (myWall.hitLeftWall && horizontal < 0f)
-            fixedHor = 0f;
-        if (myWall.hitRightWall && horizontal > 0f)
-            fixedHor = 0f;
-        if ((myWall.hitLeftWall || myWall.hitRightWall) && !myGround.isGrounded)
-            fixedHor = 0;
+        if (myWall.hitWall && !myGround.isGrounded)
+        {
+            if (myWall.hitRightWall && horizontal < 0 && Input.GetButtonDown("Jump"))
+                rigidbody2d.AddForce(new Vector2(-speed * 2 / 3, jumpForce), ForceMode2D.Impulse);
+            else if (myWall.hitLeftWall && horizontal > 0 && Input.GetButtonDown("Jump"))
+                rigidbody2d.AddForce(new Vector2(speed * 2 / 3, jumpForce), ForceMode2D.Impulse);
+        }
     }
 }
