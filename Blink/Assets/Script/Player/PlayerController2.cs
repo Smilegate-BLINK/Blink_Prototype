@@ -33,8 +33,8 @@ public class PlayerController2 : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        Move();
         ChangeFriction();
+        Move();
     }
 
     private void ChangeFriction()
@@ -51,13 +51,7 @@ public class PlayerController2 : MonoBehaviour
         horizontal = (int)Input.GetAxis("Horizontal");
 
         DoWallJump(horizontal);
-        if (myGround.isGrounded && Input.GetButtonDown("Jump"))
-        {
-            myRigid.AddForce(new Vector2(myRigid.velocity.x, jumpForce), ForceMode2D.Impulse);
-        }
-        if (Input.GetButtonUp("Jump") && myRigid.velocity.y > 0.0f)
-            myRigid.velocity = (new Vector2(myRigid.velocity.x, myRigid.velocity.y * jumpDiff));
-        if (myGround.isGrounded && !myGround.isSloped)
+        if (myGround.canMove)
         {
             myRigid.AddForce(new Vector2(horizontal * speed, 0f));
             if (myRigid.velocity.x > speed)
@@ -65,11 +59,17 @@ public class PlayerController2 : MonoBehaviour
             else if (myRigid.velocity.x < -speed)
                 myRigid.velocity = new Vector2(-speed, myRigid.velocity.y);
         }
+
+        if (myGround.canJump && Input.GetButtonDown("Jump"))
+            myRigid.AddForce(new Vector2(myRigid.velocity.x, jumpForce), ForceMode2D.Impulse);
+
+        if (Input.GetButtonUp("Jump") && myRigid.velocity.y > 0f)
+            myRigid.velocity = (new Vector2(myRigid.velocity.x, myRigid.velocity.y * jumpDiff));
     }
 
     private void DoWallJump(float horizontal)
     {
-        if (myWall.hitWall && !myGround.isGrounded)
+        if (myWall.hitWall && !myGround.canMove)
         {
             if (myWall.hitRightWall && horizontal < 0 && Input.GetButtonDown("Jump"))
                 myRigid.AddForce(new Vector2(-speed, jumpForce), ForceMode2D.Impulse);

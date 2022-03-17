@@ -53,7 +53,6 @@ public class PlayerController : MonoBehaviour
         Move();
         Jump();
         movePos = myRigid.velocity;
-        myGround.SetBoundOption(checkBoundOption);
     }
 
     // 입력값을 받는 함수

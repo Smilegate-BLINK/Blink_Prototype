@@ -4,47 +4,43 @@ using UnityEngine;
 
 public class GroundCheck : MonoBehaviour
 {
-    private bool checkBounceOption;
 
+    public bool canMove;
+    public bool canJump;
     public bool isGrounded;
     public bool isSlippered;
     public bool isSloped;
 
-    public void SetBoundOption(bool option)
+    private void Update()
     {
-        checkBounceOption = option;
+        canMove = isGrounded || isSlippered;
+        canJump = isGrounded || isSloped;
+
+        if (isGrounded && isSloped)
+            isSloped = false;
+        if (isGrounded && isSlippered)
+            isSlippered = false;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+/*    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!isGrounded && collision.tag == "Ground" && !checkBounceOption)
+        if (!isGrounded && collision.tag == "Ground")
             isGrounded = true;
         else if (!isGrounded && collision.tag == "Slope")
-        {
-            isGrounded = true;
             isSloped = true;
-        }
         else if (!isGrounded && collision.tag == "Slipper")
-        {
-            isGrounded = true;
             isSlippered = true;
-        }
     }
-
+*/
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (!isGrounded && collision.tag == "Ground" && !checkBounceOption)
-            isGrounded = true;
+        if (!isGrounded && collision.tag == "Ground")
+            isGrounded = true; 
         else if (!isGrounded && collision.tag == "Slope")
-        {
-            isGrounded = true;
             isSloped = true;
-        }
         else if (!isGrounded && collision.tag == "Slipper")
-        {
-            isGrounded = true;
             isSlippered = true;
-        }
+        
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -52,14 +48,8 @@ public class GroundCheck : MonoBehaviour
         if (collision.tag == "Ground")
             isGrounded = false;
         else if (collision.tag == "Slope")
-        {
-            isGrounded = false;
             isSloped = false;
-        }
         else if (collision.tag == "Slipper")
-        {
-            isGrounded = false;
             isSlippered = false;
-        }
     }
 }
