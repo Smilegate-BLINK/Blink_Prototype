@@ -39,10 +39,10 @@ public class PlayerController2 : MonoBehaviour
 
     private void ChangeFriction()
     {
-        if (myGround.isSlippered)
-            myCol.sharedMaterial = slipperPM;
-        else
+        if (myGround.isGrounded || !myGround.canJump)
             myCol.sharedMaterial = groundPM;
+        else
+            myCol.sharedMaterial = slipperPM;
     }
 
     private void Move()

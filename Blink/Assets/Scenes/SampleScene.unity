@@ -1178,6 +1178,7 @@ MonoBehaviour:
   doBlinkFunc: 0
   startshadedTime: 1
   shadedTimeTaken: 3
+  blinkAlpha: 0
 --- !u!1001 &991392560
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1203,7 +1204,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5108398099046824065, guid: a91f9bbf642baef40a3cca2e08eb2293, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.94
+      value: 9.38
       objectReference: {fileID: 0}
     - target: {fileID: 5108398099046824065, guid: a91f9bbf642baef40a3cca2e08eb2293, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1654,7 +1655,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5108398099046824065, guid: a91f9bbf642baef40a3cca2e08eb2293, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.51
+      value: 10.63
       objectReference: {fileID: 0}
     - target: {fileID: 5108398099046824065, guid: a91f9bbf642baef40a3cca2e08eb2293, type: 3}
       propertyPath: m_LocalPosition.z

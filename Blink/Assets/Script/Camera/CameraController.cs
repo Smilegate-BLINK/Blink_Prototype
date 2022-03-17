@@ -28,8 +28,6 @@ public class CameraController : MonoBehaviour
         yScreenHalfSize = myCamera.orthographicSize;
         xScreenHalfSize = myCamera.aspect * yScreenHalfSize;
         camearDepth = myCamera.transform.position.z;
-        Debug.Log(yScreenHalfSize);
-        Debug.Log(xScreenHalfSize);
     }
 
     // Update is called once per frame
@@ -57,15 +55,10 @@ public class CameraController : MonoBehaviour
     }
 
     private void changeBackGround()
-    {
-        if (myWorld.doBlinkFunc)
-        {
-            if (myWorld.getWorldBlackOut())
-                myCamera.backgroundColor = Color.black;
-            else
-                myCamera.backgroundColor = Color.white;
-        }
-        else
+    { 
+        if (myWorld.getWorldBlackOut())
             myCamera.backgroundColor = Color.black;
+        else
+            myCamera.backgroundColor = Color.white;
     }
 }
