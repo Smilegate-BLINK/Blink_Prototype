@@ -119,4 +119,16 @@ public class PlayerController : MonoBehaviour
             item.Use(gameObject);
         }
     }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (Input.GetKey(KeyCode.UpArrow))
+        {
+            IInteraction interaction = collision.GetComponent<IInteraction>();
+            if (interaction != null)
+            {
+                interaction.Interact(gameObject);
+            }
+        }
+    }
 }
