@@ -73,4 +73,8 @@ public class WorldController : MonoBehaviour
         return worldAlpha;
     }
 
+    public void IncreaseShadeTime(float fDeltaTime)
+    {
+        shadedTimeTaken += fDeltaTime;
+    }
 }
