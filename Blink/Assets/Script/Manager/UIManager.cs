@@ -18,6 +18,7 @@ public class UIManager : MonoBehaviour
             sunglassImage.enabled = false;
             sunglassSlider.enabled = false;
             instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
