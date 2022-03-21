@@ -17,6 +17,20 @@ public class ButtonFunctions : MonoBehaviour
 
     public void LoadSettingUI()
     {
+        
+    }
 
+    public void LoadCredit()
+    {
+
+    }
+    
+    public void QuitGame()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 }
