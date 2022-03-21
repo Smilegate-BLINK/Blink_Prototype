@@ -14,7 +14,7 @@ public class GroundCheck : MonoBehaviour
     private void Update()
     {
         canMove = isGrounded || isSlippered;
-        canJump = isGrounded || isSloped;
+        canJump = isGrounded || isSloped || isSlippered;
 
         if (isGrounded && isSloped)
             isSloped = false;
@@ -22,34 +22,43 @@ public class GroundCheck : MonoBehaviour
             isSlippered = false;
     }
 
-/*    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (!isGrounded && collision.tag == "Ground")
-            isGrounded = true;
-        else if (!isGrounded && collision.tag == "Slope")
-            isSloped = true;
-        else if (!isGrounded && collision.tag == "Slipper")
-            isSlippered = true;
-    }
-*/
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (!isGrounded && collision.tag == "Ground")
-            isGrounded = true; 
-        else if (!isGrounded && collision.tag == "Slope")
-            isSloped = true;
-        else if (!isGrounded && collision.tag == "Slipper")
-            isSlippered = true;
-        
+        if (!isGrounded)
+        {
+            switch (collision.tag)
+            {
+                case "Ground":
+                    isGrounded = true;
+                    break;
+                case "Slope":
+                    isSloped = true;
+                    break;
+                case "Slipper":
+                    isSlippered = true;
+                    break;
+                default:
+                    Debug.LogError("추가되지 않은 발판을 밟았습니다.");
+                    break;
+            }
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.tag == "Ground")
-            isGrounded = false;
-        else if (collision.tag == "Slope")
-            isSloped = false;
-        else if (collision.tag == "Slipper")
-            isSlippered = false;
+        switch (collision.tag)
+        {
+            case "Ground":
+                isGrounded = false;
+                break;
+            case "Slope":
+                isSloped = false;
+                break;
+            case "Slipper":
+                isSlippered = false;
+                break;
+            default:
+                break;
+        }
     }
 }
