@@ -31,9 +31,12 @@ public class WorldController : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        // 임시 게임 종료 코드
         if (Input.GetKeyDown(KeyCode.Escape))
             Application.Quit();
 
+
+        // 눈 깜빡임 관련
         worldBlackOut = !plBlink.getEyeOpend();
         if (doBlinkFunc)
             changeWorldAlpha();
