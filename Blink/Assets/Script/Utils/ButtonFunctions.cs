@@ -17,7 +17,7 @@ public class ButtonFunctions : MonoBehaviour
 
     public void LoadSettingUI()
     {
-        
+        UIManager.instance.SetActiveSettingUI(true);
     }
 
     public void LoadCredit()
@@ -32,5 +32,10 @@ public class ButtonFunctions : MonoBehaviour
 #else
         Application.Quit();
 #endif
+    }
+
+    public void QuitSetting()
+    {
+        UIManager.instance.SetActiveSettingUI(false);
     }
 }
