@@ -17,6 +17,7 @@ public class WorldController : MonoBehaviour
 
     // true시 암전
     private bool worldBlackOut;
+    // 1이 불투명, 0이 투명
     private float worldAlpha;
 
     // Start is called before the first frame update
@@ -51,6 +52,7 @@ public class WorldController : MonoBehaviour
     private void changeWorldAlpha()
     {
         // 눈이 감겨있으면
+
         if (worldBlackOut)
         {
             time += Time.deltaTime;
