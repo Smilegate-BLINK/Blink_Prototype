@@ -17,12 +17,6 @@ public class VolumeSetting : MonoBehaviour
         audioMixer.SetFloat(gameObject.name, slider.value * 0.4f - 30f);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void SetVolumeText(float value)
     {
         Text text = GetComponentInChildren<Text>();

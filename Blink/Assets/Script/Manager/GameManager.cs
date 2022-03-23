@@ -10,8 +10,8 @@ public class GameManager : MonoBehaviour
     [Header("시작 세이브 지점")]
     public GameObject savePoint;
 
-    private KeySetting _keySetting;
-    public KeySetting keySetting
+    private KeyManager _keySetting;
+    public KeyManager keySetting
     {
         get => _keySetting;
         private set => _keySetting = value;
@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     {
         if(instance == null)
         {
-            _keySetting = new KeySetting();
+            _keySetting = new KeyManager();
             instance = this;
             DontDestroyOnLoad(gameObject);
         }

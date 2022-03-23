@@ -37,5 +37,7 @@ public class ButtonFunctions : MonoBehaviour
     public void QuitSetting()
     {
         UIManager.instance.SetActiveSettingUI(false);
+        KeyManager.instance.CheckKeyOverlap();
     }
+
 }
