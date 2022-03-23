@@ -9,11 +9,19 @@ public class GameManager : MonoBehaviour
 
     [Header("시작 세이브 지점")]
     public GameObject savePoint;
+
+    private KeySetting _keySetting;
+    public KeySetting keySetting
+    {
+        get => _keySetting;
+        private set => _keySetting = value;
+    }
     // Start is called before the first frame update
     void Start()
     {
         if(instance == null)
         {
+            _keySetting = new KeySetting();
             instance = this;
             DontDestroyOnLoad(gameObject);
         }
