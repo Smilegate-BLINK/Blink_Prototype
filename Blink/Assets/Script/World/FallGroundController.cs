@@ -9,11 +9,14 @@ public class FallGroundController : MonoBehaviour
     [SerializeField]
     float destroySec = 3f;
 
+    private bool isTriggerd;
+
     Rigidbody2D myRigid;
     BoxCollider2D myCol;
     // Start is called before the first frame update
     void Start()
     {
+        isTriggerd = false;
         myRigid = GetComponent<Rigidbody2D>();
         myCol = GetComponent<BoxCollider2D>();
     }
@@ -22,14 +25,19 @@ public class FallGroundController : MonoBehaviour
     {
         if (collision.gameObject.tag.Equals("Player"))
         {
-            Invoke("FallPlatform", fallSec);
-            Destroy(gameObject, destroySec);
+            float thisHeight = (transform.localScale.y + collision.transform.localScale.y) * 0.5f + transform.position.y;
+            if (collision.transform.position.y >= thisHeight)
+            {
+                isTriggerd = true;
+                Invoke("FallPlatform", fallSec);
+                Destroy(gameObject, destroySec);
+            }
         }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.tag.Equals("Player"))
+        if (collision.gameObject.tag.Equals("Player") && isTriggerd)
         {
             myCol.enabled = false;
         }
