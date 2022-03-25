@@ -36,6 +36,7 @@ public class UIManager : MonoBehaviour
 
     private void Init()
     {
+        Screen.SetResolution(1920, 1080, true);
         for (int i = 0; i < text.Length; ++i)
         {
             text[i].text = KeyManager.instance.userKey[(KeyAction)i].ToString();
@@ -45,5 +46,17 @@ public class UIManager : MonoBehaviour
    public void SetActiveSettingUI(bool isActive)
     {
         SettingUI.SetActive(isActive);
+    }
+
+    public void ChangeScreenResolution(int isWindow)
+    {
+        if(isWindow == 1)
+        {
+            Screen.SetResolution(1080, 720, false);
+        }
+        else
+        {
+            Screen.SetResolution(1920, 1080, true);
+        }
     }
 }

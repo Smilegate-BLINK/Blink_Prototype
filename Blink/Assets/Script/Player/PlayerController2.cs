@@ -37,6 +37,7 @@ public class PlayerController2 : MonoBehaviour
         Move();
     }
 
+    // 현재 밟고 있는 발판의 종류에 따라 그것이 바뀜
     private void ChangeFriction()
     {
         if (myGround.isGrounded || !myGround.canJump)
@@ -51,7 +52,8 @@ public class PlayerController2 : MonoBehaviour
         horizontal = (int)Input.GetAxis("Horizontal");
 
         DoWallJump(horizontal);
-        if (myGround.canMove)
+        // 이 오브젝트가 움직일 수 있거나, 움직일 수 없지만 y축으로 움직이지 않으면 좌우 움직임 가능
+        if (myGround.canMove || (!myGround.canMove && myRigid.velocity.y == 0f && !myWall.hitWall))
         {
             myRigid.AddForce(new Vector2(horizontal * speed, 0f));
             if (myRigid.velocity.x > speed)
@@ -60,6 +62,7 @@ public class PlayerController2 : MonoBehaviour
                 myRigid.velocity = new Vector2(-speed, myRigid.velocity.y);
         }
 
+        // 점프 및 점프키 누름 정도에 따라 점프력 결정
         if (myGround.canJump && Input.GetButtonDown("Jump"))
             myRigid.AddForce(new Vector2(myRigid.velocity.x, jumpForce), ForceMode2D.Impulse);
 
@@ -67,6 +70,7 @@ public class PlayerController2 : MonoBehaviour
             myRigid.velocity = (new Vector2(myRigid.velocity.x, myRigid.velocity.y * jumpDiff));
     }
 
+    // 이 오브젝트가 벽에 닿아있고, 움직일 수 없으면 벽의 반대 방향으로 벽점프가 가능함
     private void DoWallJump(float horizontal)
     {
         if (myWall.hitWall && !myGround.canMove)

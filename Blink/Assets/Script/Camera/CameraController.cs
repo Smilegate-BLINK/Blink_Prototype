@@ -28,6 +28,7 @@ public class CameraController : MonoBehaviour
         yScreenHalfSize = myCamera.orthographicSize;
         xScreenHalfSize = myCamera.aspect * yScreenHalfSize;
         camearDepth = myCamera.transform.position.z;
+        myCamera.transform.position = myPlayer.transform.position + new Vector3(0, 0, camearDepth);
     }
 
     // Update is called once per frame
