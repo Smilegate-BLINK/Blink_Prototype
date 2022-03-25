@@ -7,16 +7,16 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager instance = null;
 
-    public Slider sunglassSlider;
-
-    public Image sunglassImage;
+    [SerializeField]
+    private GameObject SettingUI;
+    [SerializeField]
+    private Text[] text;
     // Start is called before the first frame update
     void Start()
     {
         if (instance == null)
         {
-            sunglassImage.enabled = false;
-            sunglassSlider.enabled = false;
+            Init();
             instance = this;
             DontDestroyOnLoad(gameObject);
         }
@@ -26,23 +26,37 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void EnableSunglass()
+    private void Update()
     {
-        sunglassSlider.value = sunglassSlider.maxValue;
-        sunglassSlider.enabled = true;
-        sunglassImage.enabled = true;
-        StartCoroutine(DecreaseDurability());
+        for (int i = 0; i < text.Length; ++i)
+        {
+            text[i].text = KeyManager.instance.userKey[(KeyAction)i].ToString();
+        }
     }
 
-    IEnumerator DecreaseDurability()
+    private void Init()
     {
-        while (sunglassSlider.value > 0)
+        Screen.SetResolution(1920, 1080, true);
+        for (int i = 0; i < text.Length; ++i)
         {
-            sunglassSlider.value -= Time.deltaTime * 10;
-            yield return null;
+            text[i].text = KeyManager.instance.userKey[(KeyAction)i].ToString();
         }
+    }
 
-        sunglassSlider.enabled = false;
-        sunglassImage.enabled = false;
+   public void SetActiveSettingUI(bool isActive)
+    {
+        SettingUI.SetActive(isActive);
+    }
+
+    public void ChangeScreenResolution(int isWindow)
+    {
+        if(isWindow == 1)
+        {
+            Screen.SetResolution(1080, 720, false);
+        }
+        else
+        {
+            Screen.SetResolution(1920, 1080, true);
+        }
     }
 }
