@@ -21,6 +21,8 @@ public class PlayerController2 : MonoBehaviour
     [Header("버튼 누름에 따른 점프력 차이")]
     public float jumpDiff = 0.6f;
 
+    private int horizontal = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,11 +35,24 @@ public class PlayerController2 : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        GetHorizontalDirection();
         ChangeFriction();
         Move();
     }
 
-    // 현재 밟고 있는 발판의 종류에 따라 그것이 바뀜
+    private void GetHorizontalDirection()
+    {
+        if (Input.GetKey(KeyCode.LeftArrow) && Input.GetKey(KeyCode.RightArrow))
+            horizontal = 0;
+        else if (Input.GetKey(KeyCode.LeftArrow))
+            horizontal = -1;
+        else if (Input.GetKey(KeyCode.RightArrow))
+            horizontal = 1;
+        else
+            horizontal = 0;
+    }
+
+    // 현재 밟고 있는 발판의 종류에 따라 마찰력이 바뀜
     private void ChangeFriction()
     {
         if (myGround.isGrounded || !myGround.canJump)
@@ -48,9 +63,6 @@ public class PlayerController2 : MonoBehaviour
 
     private void Move()
     {
-        int horizontal;
-        horizontal = (int)Input.GetAxis("Horizontal");
-
         DoWallJump(horizontal);
         // 이 오브젝트가 움직일 수 있거나, 움직일 수 없지만 y축으로 움직이지 않으면 좌우 움직임 가능
         if (myGround.canMove || (!myGround.canMove && myRigid.velocity.y == 0f && !myWall.hitWall))
@@ -63,10 +75,10 @@ public class PlayerController2 : MonoBehaviour
         }
 
         // 점프 및 점프키 누름 정도에 따라 점프력 결정
-        if (myGround.canJump && Input.GetButtonDown("Jump"))
+        if (myGround.canJump && Input.GetKeyDown(KeyCode.Space))
             myRigid.AddForce(new Vector2(myRigid.velocity.x, jumpForce), ForceMode2D.Impulse);
 
-        if (Input.GetButtonUp("Jump") && myRigid.velocity.y > 0f)
+        if (Input.GetKeyUp(KeyCode.Space) && myRigid.velocity.y > 0f)
             myRigid.velocity = (new Vector2(myRigid.velocity.x, myRigid.velocity.y * jumpDiff));
     }
 
