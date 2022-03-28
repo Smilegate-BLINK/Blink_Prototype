@@ -32,7 +32,7 @@ public class PlayerController2 : MonoBehaviour
 
         if (!GameManager.instance.isNewGame)
         {
-            PlayerInfo info = GameManager.instance.fileIOHelper.LoadJsonFile<PlayerInfo>(Application.dataPath, "PlayerInfo");
+            PlayerInfo info = GameManager.instance.fileIOHelper.LoadJsonFile<PlayerInfo>(Application.dataPath + "/DataFiles", "PlayerInfo");
             gameObject.transform.position = info.position;
             gameObject.transform.rotation = info.rotation;
         }
@@ -119,6 +119,6 @@ public class PlayerController2 : MonoBehaviour
         playerInfo.position = gameObject.transform.position;
         playerInfo.rotation = gameObject.transform.rotation;
         string data = playerInfo.ObjectToJson();
-        GameManager.instance.fileIOHelper.CreateJsonFile(Application.dataPath, "PlayerInfo", data);
+        GameManager.instance.fileIOHelper.CreateJsonFile(Application.dataPath + "/DataFiles", "PlayerInfo", data);
     }
 }

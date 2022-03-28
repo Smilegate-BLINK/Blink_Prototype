@@ -30,16 +30,17 @@ public class UIManager : MonoBehaviour
     {
         for (int i = 0; i < text.Length; ++i)
         {
-            text[i].text = KeyManager.instance.userKey[(KeyAction)i].ToString();
+            //text[i].text = KeyManager.instance.userKey[(KeyAction)i].ToString();
         }
     }
 
     private void Init()
     {
+        SettingUI = GameObject.Find("SettingUI");
         Screen.SetResolution(1920, 1080, true);
         for (int i = 0; i < text.Length; ++i)
         {
-            text[i].text = KeyManager.instance.userKey[(KeyAction)i].ToString();
+            //text[i].text = KeyManager.instance.userKey[(KeyAction)i].ToString();
         }
     }
 

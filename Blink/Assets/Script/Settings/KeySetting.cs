@@ -1,13 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using System;
+public enum KeyAction { INTERACT, JUMP, LEFT, RIGHT, BLINK }
 
-public enum KeyAction {  INTERACT, JUMP, LEFT, RIGHT, BLINK }
-
-public class KeyManager : MonoBehaviour
+[Serializable]
+public class KeySetting : MonoBehaviour
 {
-    public static KeyManager instance = null;
     private Dictionary<KeyAction, KeyCode> defaultKey = new Dictionary<KeyAction, KeyCode>
     {
         { KeyAction.JUMP, KeyCode.Space },
@@ -20,16 +19,7 @@ public class KeyManager : MonoBehaviour
     private int idx;
     private void Awake()
     {
-        if(instance == null)
-        {
-            Init();
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        Init();
     }
 
     private void Init()
@@ -41,7 +31,7 @@ public class KeyManager : MonoBehaviour
     private void OnGUI()
     {
         Event ev = Event.current;
-        if(ev.isKey)
+        if (ev.isKey)
         {
             userKey[(KeyAction)idx] = ev.keyCode;
             idx = -1;
@@ -50,13 +40,13 @@ public class KeyManager : MonoBehaviour
 
     public bool CheckKeyOverlap()
     {
-        for(int i=0;i<userKey.Count;++i)
+        for (int i = 0; i < userKey.Count; ++i)
         {
-            for(int j=i+1;j<userKey.Count - 1;++j)
+            for (int j = i + 1; j < userKey.Count - 1; ++j)
             {
                 //유저가 세팅한 키 중 같은 값을 가진 키가 두 개 이상인 경우
                 //원래의 키 값으로 복원
-                if(userKey[(KeyAction)i] == userKey[(KeyAction)j])
+                if (userKey[(KeyAction)i] == userKey[(KeyAction)j])
                 {
                     RestoreDefault();
                     return true;
@@ -68,7 +58,7 @@ public class KeyManager : MonoBehaviour
 
     private void RestoreDefault()
     {
-        foreach(var pair in defaultKey)
+        foreach (var pair in defaultKey)
         {
             userKey[pair.Key] = defaultKey[pair.Key];
         }
