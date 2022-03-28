@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class WorldController : MonoBehaviour
 {
+    // 월드 싱글톤화
+    private static WorldController _instance;
+    public static WorldController Instance { get { return _instance; } }
+
+
     private GameObject myPlayer;
     private PlayerBlink plBlink;
 
@@ -15,10 +20,21 @@ public class WorldController : MonoBehaviour
     private float shadedTimeTaken = 3f;
     private float time;
 
+
+    private bool isPause;
     // true시 암전
     private bool worldBlackOut;
     // 1이 불투명, 0이 투명
     private float worldAlpha;
+
+
+    private void Awake()
+    {
+        if (_instance != null && _instance != this)
+            Destroy(this.gameObject);
+        else
+            _instance = this;
+    }
 
     // Start is called before the first frame update
     private void Start()
@@ -27,15 +43,17 @@ public class WorldController : MonoBehaviour
         plBlink = myPlayer.GetComponent<PlayerBlink>();
         worldBlackOut = !plBlink.getEyeOpend();
         worldAlpha = 1f;
+        isPause = false;
     }
 
     // Update is called once per frame
     private void Update()
     {
-        // 임시 게임 종료 코드
-        if (Input.GetKeyDown(KeyCode.Escape))
-            Application.Quit();
-
+        // 환경설정 진입, 탈출
+        if (Input.GetKeyDown(KeyCode.Escape) && !isPause)
+            EnterSetting();
+        else if (Input.GetKeyDown(KeyCode.Escape) && isPause)
+            ExitSetting();
 
         // 눈 깜빡임 관련
         worldBlackOut = !plBlink.getEyeOpend();
@@ -45,14 +63,12 @@ public class WorldController : MonoBehaviour
         {
             worldBlackOut = false;
             worldAlpha = 1f;
-        }
-            
+        }  
     }
 
     private void changeWorldAlpha()
     {
         // 눈이 감겨있으면
-
         if (worldBlackOut)
         {
             time += Time.deltaTime;
@@ -81,5 +97,19 @@ public class WorldController : MonoBehaviour
     public void IncreaseShadeTime(float fDeltaTime)
     {
         shadedTimeTaken += fDeltaTime;
+    }
+    
+    private void EnterSetting()
+    {
+        isPause = true;
+        Time.timeScale = 0f;
+        // 설정창 띄우기
+    }
+
+    private void ExitSetting()
+    {
+        //설정창 닫기
+        Time.timeScale = 1f;
+        isPause = false;
     }
 }

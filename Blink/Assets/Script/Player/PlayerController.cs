@@ -7,7 +7,6 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D myRigid;
-    private BoxCollider2D myCollider;
     private GroundCheck myGround;
 
     private int movePositionX;
@@ -30,7 +29,6 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         myRigid = GetComponent<Rigidbody2D>();
-        myCollider = GetComponent<BoxCollider2D>();
         myGround = transform.GetChild(0).GetComponent<GroundCheck>();
     }
     // Start is called before the first frame update

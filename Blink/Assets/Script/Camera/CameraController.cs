@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    private WorldController myWorld;
-
     private Vector3 camPos;
     private Vector2 playerPos;
     private float xScreenHalfSize;
@@ -17,7 +15,6 @@ public class CameraController : MonoBehaviour
 
     private void Awake()
     {
-        myWorld = GameObject.Find("World").GetComponent<WorldController>();
         myCamera = GetComponent<Camera>();
         myPlayer = GameObject.Find("Player").GetComponent<Transform>();
     }
@@ -57,7 +54,7 @@ public class CameraController : MonoBehaviour
 
     private void changeBackGround()
     { 
-        if (myWorld.getWorldBlackOut())
+        if (WorldController.Instance.getWorldBlackOut())
             myCamera.backgroundColor = Color.black;
         else
             myCamera.backgroundColor = Color.white;
