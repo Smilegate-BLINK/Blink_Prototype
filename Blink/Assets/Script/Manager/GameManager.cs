@@ -10,18 +10,15 @@ public class GameManager : MonoBehaviour
     [Header("시작 세이브 지점")]
     public GameObject savePoint;
 
-    private KeyManager _keySetting;
-    public KeyManager keySetting
-    {
-        get => _keySetting;
-        private set => _keySetting = value;
-    }
+    public FileIOHelper fileIOHelper;
+    public bool isNewGame;
+
     // Start is called before the first frame update
     void Start()
     {
         if(instance == null)
         {
-            _keySetting = new KeyManager();
+            Init();
             instance = this;
             DontDestroyOnLoad(gameObject);
         }
@@ -37,6 +34,12 @@ public class GameManager : MonoBehaviour
         
     }
 
+    private void Init()
+    {
+        fileIOHelper = new FileIOHelper();
+        isNewGame = true;
+    }
+
     public void SetSavepoint(GameObject elevator)
     {
         this.savePoint = elevator;
@@ -45,5 +48,9 @@ public class GameManager : MonoBehaviour
     public void MoveToSavepoint(GameObject player)
     {
         player.transform.position = savePoint.transform.position;
+    }
+
+    private void OnApplicationQuit()
+    {
     }
 }

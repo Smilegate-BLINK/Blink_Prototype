@@ -107,26 +107,5 @@ public class PlayerController : MonoBehaviour
                 myRigid.velocity = new Vector2(movePos.x, -movePos.y) * bounceForce;
         }
     }
-    
-    //아이템 충돌 실행 함수
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        IItem item = other.GetComponent<IItem>();
-        if (item != null)
-        {
-            item.Use(gameObject);
-        }
-    }
 
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (Input.GetKey(KeyCode.UpArrow))
-        {
-            IInteraction interaction = collision.GetComponent<IInteraction>();
-            if (interaction != null)
-            {
-                interaction.Interact(gameObject);
-            }
-        }
-    }
 }

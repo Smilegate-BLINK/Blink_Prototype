@@ -7,12 +7,13 @@ public class ButtonFunctions : MonoBehaviour
 {
     public void LoadNewGame()
     {
-        SceneManager.LoadSceneAsync("PlayerWorld");
+        SceneManager.LoadSceneAsync("PlayerWorld 1");
     }
 
     public void LoadContinueGame()
     {
-        SceneManager.LoadSceneAsync("PlayerWorld");
+        GameManager.instance.isNewGame = false;
+        SceneManager.LoadSceneAsync("PlayerWorld 1");
     }
 
     public void LoadSettingUI()
@@ -37,7 +38,7 @@ public class ButtonFunctions : MonoBehaviour
     public void QuitSetting()
     {
         UIManager.instance.SetActiveSettingUI(false);
-        KeyManager.instance.CheckKeyOverlap();
+        //KeyManager.instance.CheckKeyOverlap();
     }
 
 }
