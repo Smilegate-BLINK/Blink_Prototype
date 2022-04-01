@@ -8,9 +8,14 @@ public class WorldController : MonoBehaviour
     private static WorldController _instance;
     public static WorldController Instance { get { return _instance; } }
 
-
+    // 플레이어 인스턴스
     private GameObject myPlayer;
     private PlayerBlink plBlink;
+
+    // 세이브 포인트 인스턴스
+    public List<SavePoint> savePoints = new List<SavePoint>();
+    public int saveSpot;
+
 
     [Header("눈 감기 매커니즘 실행 여부")]
     public bool doBlinkFunc = false;
@@ -20,7 +25,7 @@ public class WorldController : MonoBehaviour
     private float shadedTimeTaken = 3f;
     private float time;
 
-
+    // 일시정지 여부
     private bool isPause;
     // true시 암전
     private bool worldBlackOut;
@@ -41,9 +46,15 @@ public class WorldController : MonoBehaviour
     {
         myPlayer = GameObject.Find("Player");
         plBlink = myPlayer.GetComponent<PlayerBlink>();
+
         worldBlackOut = !plBlink.getEyeOpend();
         worldAlpha = 1f;
+
         isPause = false;
+
+        // 세팅에서 saveSpot 받아오기, 만약 받아오기 실패하면 0으로 설정
+        saveSpot = 0;
+        PlayerMovedToPoint();
     }
 
     // Update is called once per frame
@@ -63,7 +74,8 @@ public class WorldController : MonoBehaviour
         {
             worldBlackOut = false;
             worldAlpha = 1f;
-        }  
+            time = 0f;
+        }
     }
 
     private void changeWorldAlpha()
@@ -98,7 +110,15 @@ public class WorldController : MonoBehaviour
     {
         shadedTimeTaken += fDeltaTime;
     }
-    
+
+
+    // 플레이어의 위치를 savePoints[saveSpot]의 위치로 놓아주는 함수.
+    public void PlayerMovedToPoint()
+    {
+        myPlayer.transform.position = savePoints[saveSpot].transform.position;
+        CameraController.Instance.SetCameraPos();
+    }
+
     private void EnterSetting()
     {
         isPause = true;
@@ -112,4 +132,5 @@ public class WorldController : MonoBehaviour
         Time.timeScale = 1f;
         isPause = false;
     }
+
 }

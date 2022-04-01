@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3741777490261344865}
   - component: {fileID: 5750924085148133483}
   m_Layer: 0
-  m_Name: SavePoint
+  m_Name: Elevator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

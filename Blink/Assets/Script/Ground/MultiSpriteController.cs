@@ -22,7 +22,7 @@ public class MultiSpriteController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (WorldController.Instance.getWorldBlackOut())
+        if (WorldController.Instance.getWorldBlackOut() && WorldController.Instance.doBlinkFunc)
         {
             if (WorldController.Instance.getWorldAlpha() != 0f)
             {

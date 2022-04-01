@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    // 카메라컨트롤러 싱글톤화
+    private static CameraController _instance;
+    public static CameraController Instance { get { return _instance; } }
+
     private Vector3 camPos;
     private Vector2 playerPos;
     private float xScreenHalfSize;
@@ -13,8 +17,16 @@ public class CameraController : MonoBehaviour
     private Transform myPlayer;
     private Camera myCamera;
 
+    public float initialPosX;
+    public float initialPosY;
+
     private void Awake()
     {
+        if (_instance != null && _instance != this)
+            Destroy(this.gameObject);
+        else
+            _instance = this;
+
         myCamera = GetComponent<Camera>();
         myPlayer = GameObject.Find("Player").GetComponent<Transform>();
     }
@@ -25,7 +37,7 @@ public class CameraController : MonoBehaviour
         yScreenHalfSize = myCamera.orthographicSize;
         xScreenHalfSize = myCamera.aspect * yScreenHalfSize;
         camearDepth = myCamera.transform.position.z;
-        myCamera.transform.position = myPlayer.transform.position + new Vector3(0, 0, camearDepth);
+        SetCameraPos();
     }
 
     // Update is called once per frame
@@ -35,6 +47,13 @@ public class CameraController : MonoBehaviour
         changeBackGround();
     }
 
+    // 플레이어가 순간이동할 때 시행되는 카메라 움직임
+    public void SetCameraPos()
+    {
+        myCamera.transform.position = myPlayer.transform.position + new Vector3(initialPosX, initialPosY, camearDepth);
+    }
+
+    // 플레이어가 걸어 이동할 때 시행되는 카메라 움직임
     private void moveCamera()
     {
         
