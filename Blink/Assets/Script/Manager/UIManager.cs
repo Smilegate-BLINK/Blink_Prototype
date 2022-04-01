@@ -7,16 +7,14 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager instance = null;
 
-    [SerializeField]
     private GameObject SettingUI;
-    [SerializeField]
-    private Text[] text;
+
     // Start is called before the first frame update
     void Start()
     {
+        Init();
         if (instance == null)
         {
-            Init();
             instance = this;
             DontDestroyOnLoad(gameObject);
         }
@@ -26,22 +24,11 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        for (int i = 0; i < text.Length; ++i)
-        {
-            //text[i].text = KeyManager.instance.userKey[(KeyAction)i].ToString();
-        }
-    }
-
     private void Init()
     {
-        SettingUI = GameObject.Find("SettingUI");
+        var Canvas = GameObject.Find("Canvas");
+        SettingUI = Canvas.transform.Find("SettingUI").gameObject;
         Screen.SetResolution(1920, 1080, true);
-        for (int i = 0; i < text.Length; ++i)
-        {
-            //text[i].text = KeyManager.instance.userKey[(KeyAction)i].ToString();
-        }
     }
 
    public void SetActiveSettingUI(bool isActive)

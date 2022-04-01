@@ -2,21 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Newtonsoft.Json;
+using System.IO;
+using UnityEngine.UI;
+
 public enum KeyAction { INTERACT, JUMP, LEFT, RIGHT, BLINK }
 
-[Serializable]
 public class KeySetting : MonoBehaviour
 {
     private Dictionary<KeyAction, KeyCode> defaultKey = new Dictionary<KeyAction, KeyCode>
     {
+        { KeyAction.INTERACT, KeyCode.UpArrow },
         { KeyAction.JUMP, KeyCode.Space },
         { KeyAction.LEFT,  KeyCode.LeftArrow },
         { KeyAction.RIGHT, KeyCode.RightArrow },
-        { KeyAction.BLINK,  KeyCode.D },
-        { KeyAction.INTERACT, KeyCode.UpArrow }
+        { KeyAction.BLINK,  KeyCode.D }
     };
     public Dictionary<KeyAction, KeyCode> userKey;
     private int idx;
+    public List<Text> btnText;
     private void Awake()
     {
         Init();
@@ -24,8 +28,10 @@ public class KeySetting : MonoBehaviour
 
     private void Init()
     {
+        var fName = string.Format("{0}/{1}.json", Application.dataPath + "/DataFiles", "KeySetting");
+        var jsonData = File.ReadAllText(fName);
+        userKey = new Dictionary<KeyAction, KeyCode>(JsonConvert.DeserializeObject<Dictionary<KeyAction, KeyCode>>(jsonData));
         idx = -1;
-        userKey = new Dictionary<KeyAction, KeyCode>(defaultKey);
     }
 
     private void OnGUI()
@@ -35,6 +41,14 @@ public class KeySetting : MonoBehaviour
         {
             userKey[(KeyAction)idx] = ev.keyCode;
             idx = -1;
+        }
+    }
+
+    private void Update()
+    {
+        for(int i=0;i<btnText.Count;++i)
+        {
+            btnText[i].text = userKey[(KeyAction)i].ToString();
         }
     }
 
@@ -68,4 +82,11 @@ public class KeySetting : MonoBehaviour
     {
         idx = action;
     }
+
+    private void OnDisable()
+    {
+        var jsonData = JsonConvert.SerializeObject(userKey, Formatting.Indented);
+        GameManager.instance.fileIOHelper.CreateJsonFile(Application.dataPath + "/DataFiles", "KeySetting", jsonData);
+    }
+
 }

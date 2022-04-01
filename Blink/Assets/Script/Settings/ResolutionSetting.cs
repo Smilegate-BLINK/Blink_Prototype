@@ -15,4 +15,9 @@ public class ResolutionSetting : MonoBehaviour
     {
         
     }
+
+    public void SaveSetting()
+    {
+
+    }
 }
