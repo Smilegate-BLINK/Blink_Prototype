@@ -23,7 +23,7 @@ public class SpriteController : MonoBehaviour
     void Update()
     {
         Color tmp = mySprite.color;
-        if (WorldController.Instance.getWorldBlackOut())
+        if (WorldController.Instance.getWorldBlackOut() && WorldController.Instance.doBlinkFunc)
         {
             if (tmp.a != 0f)
             {
@@ -42,6 +42,12 @@ public class SpriteController : MonoBehaviour
                 mySprite.color = tmp;
                 isChanged = true;
             }
+        }
+        if (!WorldController.Instance.doBlinkFunc)
+        {
+            tmp.a = WorldController.Instance.getWorldAlpha();
+            mySprite.material = eyeCloseMat;
+            mySprite.color = tmp;
         }
     }
 }
