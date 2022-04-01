@@ -83,7 +83,7 @@ public class KeySetting : MonoBehaviour
         idx = action;
     }
 
-    private void OnDisable()
+    private void OnApplicationQuit()
     {
         var jsonData = JsonConvert.SerializeObject(userKey, Formatting.Indented);
         GameManager.instance.fileIOHelper.CreateJsonFile(Application.dataPath + "/DataFiles", "KeySetting", jsonData);

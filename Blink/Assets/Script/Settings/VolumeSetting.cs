@@ -84,7 +84,7 @@ public class VolumeSetting : MonoBehaviour
         volumes[VolumeType[2]] = (int)value;
     }
 
-    private void OnDisable()
+    private void OnApplicationQuit()
     {
         var jsonData = JsonConvert.SerializeObject(volumes);
         GameManager.instance.fileIOHelper.CreateJsonFile(Application.dataPath + "/DataFiles", "VolumeSetting", jsonData);

@@ -26,8 +26,8 @@ public class UIManager : MonoBehaviour
 
     private void Init()
     {
-        var Canvas = GameObject.Find("Canvas");
-        SettingUI = Canvas.transform.Find("SettingUI").gameObject;
+        var Canvas = GameObject.Find("SettingUI");
+        SettingUI = Canvas.transform.Find("Canvas").gameObject;
         Screen.SetResolution(1920, 1080, true);
     }
 
