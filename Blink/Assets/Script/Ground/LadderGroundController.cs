@@ -14,8 +14,9 @@ public class LadderGroundController : MonoBehaviour
     {
         myCol = GetComponent<BoxCollider2D>();
         myCol.enabled = false;
-        overPosY = transform.position.y + (transform.localScale.y + myPlayer.transform.localScale.y) / 2;
-        underPosY = transform.position.y - (transform.localScale.y + myPlayer.transform.localScale.y) / 2;
+        overPosY = transform.position.y + (transform.lossyScale.y + myPlayer.transform.lossyScale.y) / 2;
+        underPosY = transform.position.y - (transform.lossyScale.y + myPlayer.transform.lossyScale.y) / 2;
+        
     }
 
     // Update is called once per frame

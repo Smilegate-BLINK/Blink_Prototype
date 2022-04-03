@@ -7,6 +7,10 @@ TagManager:
   - Ground
   - Slipper
   - Slope
+  - End
+  - CementDrop
+  - Destructer
+  - GroundCheck
   layers:
   - Default
   - TransparentFX
