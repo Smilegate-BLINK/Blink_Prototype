@@ -6,6 +6,7 @@ public class LadderGroundController : MonoBehaviour
 {
     private BoxCollider2D myCol;
     public GameObject myPlayer;
+    private BoxCollider2D playerCol;
     private float overPosY;
     private float underPosY;
 
@@ -13,10 +14,11 @@ public class LadderGroundController : MonoBehaviour
     void Start()
     {
         myCol = GetComponent<BoxCollider2D>();
+        playerCol = myPlayer.GetComponent<BoxCollider2D>();
         myCol.enabled = false;
-        overPosY = transform.position.y + (transform.lossyScale.y + myPlayer.transform.lossyScale.y) / 2;
-        underPosY = transform.position.y - (transform.lossyScale.y + myPlayer.transform.lossyScale.y) / 2;
-        
+        float temp = (transform.localScale.y * myCol.size.y + myCol.offset.y + myPlayer.transform.localScale.y * playerCol.size.y + playerCol.offset.y) / 2;
+        overPosY = transform.position.y + temp;
+        underPosY = transform.position.y - temp;
     }
 
     // Update is called once per frame

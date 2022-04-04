@@ -11,6 +11,7 @@ TagManager:
   - CementDrop
   - Destructer
   - GroundCheck
+  - SavePoint
   layers:
   - Default
   - TransparentFX

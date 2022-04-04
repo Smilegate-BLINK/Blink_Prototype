@@ -38,7 +38,7 @@ public class GroundCheck : MonoBehaviour
                     isSlippered = true;
                     break;
                 default:
-                    Debug.LogError("추가되지 않은 발판을 밟았습니다.");
+                    Debug.LogError(collision.tag);
                     break;
             }
         }
