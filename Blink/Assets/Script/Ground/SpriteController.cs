@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class SpriteController : MonoBehaviour
 {
-    [HideInInspector]
-    public SpriteRenderer mySprite;
+    
+    private SpriteRenderer mySprite;
 
     public Material eyeOpenMat;
     public Material eyeCloseMat;
@@ -16,6 +16,8 @@ public class SpriteController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        mySprite = GetComponent<SpriteRenderer>();
+        mySprite.material = eyeOpenMat;
         isChanged = false;
     }
 
@@ -43,11 +45,11 @@ public class SpriteController : MonoBehaviour
                 isChanged = true;
             }
         }
-        if (!WorldController.Instance.doBlinkFunc)
+       /* if (!WorldController.Instance.doBlinkFunc)
         {
             tmp.a = WorldController.Instance.getWorldAlpha();
-            mySprite.material = eyeCloseMat;
+            mySprite.material = eyeOpenMat;
             mySprite.color = tmp;
-        }
+        }*/
     }
 }
