@@ -21,7 +21,7 @@ public class KeySetting : MonoBehaviour
     public Dictionary<KeyAction, KeyCode> userKey;
     private int idx;
     public List<Text> btnText;
-    private void Awake()
+    private void Start()
     {
         Init();
     }
