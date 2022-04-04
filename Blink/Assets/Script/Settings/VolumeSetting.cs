@@ -18,15 +18,11 @@ public class VolumeSetting : MonoBehaviour
 
     public static string[] VolumeType = { "MASTER", "BGM", "SFX" };
 
-    void Awake()
+    void Start()
     {
         var fName = string.Format("{0}/{1}.json", Application.dataPath + "/DataFiles", "VolumeSetting");
         var jsonData = File.ReadAllText(fName);
         volumes = new Dictionary<string, int>(JsonConvert.DeserializeObject<Dictionary<string, int>>(jsonData));
-    }
-
-    private void Start()
-    {
         audioMixer.SetFloat("Master", volumes[VolumeType[0]] * 0.4f - 30f);
         audioMixer.SetFloat("BGM", volumes[VolumeType[1]] * 0.4f - 30f);
         audioMixer.SetFloat("SFX", volumes[VolumeType[2]] * 0.4f - 30f);

@@ -19,7 +19,7 @@ public class SettingManager: MonoBehaviour
     public ResolutionSetting resolutionSetting;
 
 
-    private void Start()
+    private void Awake()
     {
         Init();
         if(instance == null)

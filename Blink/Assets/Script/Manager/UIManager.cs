@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,7 +11,7 @@ public class UIManager : MonoBehaviour
     private GameObject SettingUI;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         Init();
         if (instance == null)
@@ -26,9 +27,7 @@ public class UIManager : MonoBehaviour
 
     private void Init()
     {
-        var Canvas = GameObject.Find("SettingUI");
-        SettingUI = Canvas.transform.Find("Canvas").gameObject;
-        Screen.SetResolution(1920, 1080, true);
+        SettingUI = GameObject.Find("SettingUI").transform.Find("Canvas").gameObject;
     }
 
    public void SetActiveSettingUI(bool isActive)
@@ -36,15 +35,16 @@ public class UIManager : MonoBehaviour
         SettingUI.SetActive(isActive);
     }
 
-    public void ChangeScreenResolution(int isWindow)
+    public void ChangeScreenResolution(Tuple<int, int> resolution, ScreenMode screenMode)
     {
-        if(isWindow == 1)
+        switch(screenMode)
         {
-            Screen.SetResolution(1080, 720, false);
-        }
-        else
-        {
-            Screen.SetResolution(1920, 1080, true);
+            case ScreenMode.FULLSCREEN:
+                Screen.SetResolution(resolution.Item1, resolution.Item2, true);
+                break;
+            case ScreenMode.WINDOW:
+                Screen.SetResolution(resolution.Item1, resolution.Item2, false);
+                break;
         }
     }
 }
