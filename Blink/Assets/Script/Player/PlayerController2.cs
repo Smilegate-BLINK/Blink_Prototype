@@ -23,6 +23,7 @@ public class PlayerController2 : MonoBehaviour
     public float jumpDiff = 0.6f;
 
     private int horizontal = 0;
+    public int tempSaveSpot = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -100,5 +101,11 @@ public class PlayerController2 : MonoBehaviour
             else if (myWall.hitLeftWall && horizontal > 0 && Input.GetButtonDown("Jump"))
                 myRigid.AddForce(new Vector2(speed, jumpForce), ForceMode2D.Impulse);
         }
+    }
+
+    public void MovetoSpot(Vector2 pos)
+    {
+        transform.position = pos;
+        CameraController.Instance.SetCameraPos();
     }
 }
