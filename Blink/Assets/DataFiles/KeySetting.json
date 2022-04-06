@@ -1,8 +1,1 @@
-{
-  "JUMP": 32,
-  "LEFT": 276,
-  "RIGHT": 275,
-  "BLINK": 100,
-  "INTERACT": 273,
-  "-1": 306
-}
+{"JUMP":32,"LEFT":276,"RIGHT":275,"BLINK":100,"INTERACT":273}

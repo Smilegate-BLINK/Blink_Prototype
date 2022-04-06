@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum ScreenMode { WINDOW, FULLSCREEN }
 
@@ -12,6 +13,10 @@ public class ResolutionSetting : MonoBehaviour
     private int resolutionIndex;
     private ScreenMode screenMode;
     private KeyValuePair<int, ScreenMode> userResolution;
+    [SerializeField]
+    private Dropdown dropdown;
+    [SerializeField]
+    private List<Toggle> toggles;
     private Tuple<int, int>[] DefaultResolution = new Tuple<int, int>[4]
         {
             new Tuple<int, int>(960, 720),
@@ -26,7 +31,8 @@ void Start()
         var fName = string.Format("{0}/{1}.json", Application.dataPath + "/DataFiles", "ResolutionSetting");
         var jsonData = File.ReadAllText(fName);
         userResolution = JsonConvert.DeserializeObject<KeyValuePair<int, ScreenMode>>(jsonData);
-        print(string.Format("{0} - {1}", userResolution.Key, userResolution.Value));
+        dropdown.value = userResolution.Key;
+        toggles[(int)userResolution.Value].isOn = true;
         UIManager.instance.ChangeScreenResolution(DefaultResolution[userResolution.Key], userResolution.Value);
     }
 
@@ -44,12 +50,6 @@ void Start()
     {
         userResolution = new KeyValuePair<int, ScreenMode>(resolutionIndex, screenMode);
         UIManager.instance.ChangeScreenResolution(DefaultResolution[resolutionIndex], screenMode);
-    }
-
-    private void OnDisable()
-    {
-        resolutionIndex = 3;
-        screenMode = ScreenMode.FULLSCREEN;
     }
 
     private void OnApplicationQuit()

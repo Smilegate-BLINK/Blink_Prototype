@@ -18,6 +18,7 @@ public class KeySetting : MonoBehaviour
         { KeyAction.RIGHT, KeyCode.RightArrow },
         { KeyAction.BLINK,  KeyCode.D }
     };
+    [HideInInspector]
     public Dictionary<KeyAction, KeyCode> userKey;
     private int idx;
     public List<Text> btnText;
@@ -85,7 +86,7 @@ public class KeySetting : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        var jsonData = JsonConvert.SerializeObject(userKey, Formatting.Indented);
+        var jsonData = JsonConvert.SerializeObject(userKey);
         GameManager.instance.fileIOHelper.CreateJsonFile(Application.dataPath + "/DataFiles", "KeySetting", jsonData);
     }
 
