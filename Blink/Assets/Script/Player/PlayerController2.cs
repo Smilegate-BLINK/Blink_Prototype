@@ -106,6 +106,7 @@ public class PlayerController2 : MonoBehaviour
     public void MovetoSpot(Vector2 pos)
     {
         transform.position = pos;
+        myRigid.velocity = Vector2.zero;
         CameraController.Instance.SetCameraPos();
     }
 }
