@@ -27,13 +27,4 @@ public class PlayerInteract : MonoBehaviour
             }
         }
     }
-
-    private void OnApplicationQuit()
-    {
-        //PlayerInfo playerInfo = new PlayerInfo(this);
-        //playerInfo.position = gameObject.transform.position;
-        //playerInfo.rotation = gameObject.transform.rotation;
-        //string data = playerInfo.ObjectToJson();
-        //GameManager.instance.fileIOHelper.CreateJsonFile(Application.dataPath + "/DataFiles", "PlayerInfo", data);
-    }
 }
