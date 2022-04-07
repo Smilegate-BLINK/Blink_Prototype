@@ -4,14 +4,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum ScreenMode { WINDOW, FULLSCREEN }
 
 public class ResolutionSetting : MonoBehaviour
 {
-    private int resolutionIndex;
-    private ScreenMode screenMode;
-    private KeyValuePair<int, ScreenMode> userResolution;
     private Tuple<int, int>[] DefaultResolution = new Tuple<int, int>[4]
         {
             new Tuple<int, int>(960, 720),
@@ -19,6 +17,14 @@ public class ResolutionSetting : MonoBehaviour
             new Tuple<int, int>(1600, 900),
             new Tuple<int, int>(1920, 1080)
         };
+    private int resolutionIndex;
+    private ScreenMode screenMode;
+    private KeyValuePair<int, ScreenMode> userResolution;
+    public KeyValuePair<int, ScreenMode> UserResolution
+    {
+        get => userResolution;
+        private set => userResolution = value;
+    }
 
 // Start is called before the first frame update
 void Start()
@@ -26,7 +32,6 @@ void Start()
         var fName = string.Format("{0}/{1}.json", Application.dataPath + "/DataFiles", "ResolutionSetting");
         var jsonData = File.ReadAllText(fName);
         userResolution = JsonConvert.DeserializeObject<KeyValuePair<int, ScreenMode>>(jsonData);
-        print(string.Format("{0} - {1}", userResolution.Key, userResolution.Value));
         UIManager.instance.ChangeScreenResolution(DefaultResolution[userResolution.Key], userResolution.Value);
     }
 
@@ -42,14 +47,8 @@ void Start()
 
     public void AcceptResolution()
     {
-        userResolution = new KeyValuePair<int, ScreenMode>(resolutionIndex, screenMode);
+        UserResolution = new KeyValuePair<int, ScreenMode>(resolutionIndex, screenMode);
         UIManager.instance.ChangeScreenResolution(DefaultResolution[resolutionIndex], screenMode);
-    }
-
-    private void OnDisable()
-    {
-        resolutionIndex = 3;
-        screenMode = ScreenMode.FULLSCREEN;
     }
 
     private void OnApplicationQuit()

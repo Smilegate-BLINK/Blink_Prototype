@@ -18,9 +18,12 @@ public class KeySetting : MonoBehaviour
         { KeyAction.RIGHT, KeyCode.RightArrow },
         { KeyAction.BLINK,  KeyCode.D }
     };
-    public Dictionary<KeyAction, KeyCode> userKey;
-    private int idx;
-    public List<Text> btnText;
+    
+    private Dictionary<KeyAction, KeyCode> userKey;
+    public Dictionary<KeyAction, KeyCode> UserKey
+    {
+        get => userKey;
+    }
     private void Start()
     {
         Init();
@@ -31,25 +34,6 @@ public class KeySetting : MonoBehaviour
         var fName = string.Format("{0}/{1}.json", Application.dataPath + "/DataFiles", "KeySetting");
         var jsonData = File.ReadAllText(fName);
         userKey = new Dictionary<KeyAction, KeyCode>(JsonConvert.DeserializeObject<Dictionary<KeyAction, KeyCode>>(jsonData));
-        idx = -1;
-    }
-
-    private void OnGUI()
-    {
-        Event ev = Event.current;
-        if (ev.isKey)
-        {
-            userKey[(KeyAction)idx] = ev.keyCode;
-            idx = -1;
-        }
-    }
-
-    private void Update()
-    {
-        for(int i=0;i<btnText.Count;++i)
-        {
-            btnText[i].text = userKey[(KeyAction)i].ToString();
-        }
     }
 
     public bool CheckKeyOverlap()
@@ -78,14 +62,9 @@ public class KeySetting : MonoBehaviour
         }
     }
 
-    public void ExchangeNewKey(int action)
-    {
-        idx = action;
-    }
-
     private void OnApplicationQuit()
     {
-        var jsonData = JsonConvert.SerializeObject(userKey, Formatting.Indented);
+        var jsonData = JsonConvert.SerializeObject(userKey);
         GameManager.instance.fileIOHelper.CreateJsonFile(Application.dataPath + "/DataFiles", "KeySetting", jsonData);
     }
 

@@ -7,16 +7,15 @@ using UnityEngine.UI;
 
 public class VolumeSetting : MonoBehaviour
 {
+    public static string[] VolumeType = { "MASTER", "BGM", "SFX" };
     [SerializeField]
     private AudioMixer audioMixer;
-    [SerializeField]
-    private List<Text> text;
-    [SerializeField]
-    private List<Slider> slider;
-    [HideInInspector]
-    public Dictionary<string, int> volumes;
-
-    public static string[] VolumeType = { "MASTER", "BGM", "SFX" };
+    private Dictionary<string, int> volumes;
+    public Dictionary<string, int> Volumes
+    {
+        get => volumes;
+        private set => volumes = value;
+    }
 
     void Start()
     {
@@ -26,23 +25,11 @@ public class VolumeSetting : MonoBehaviour
         audioMixer.SetFloat("Master", volumes[VolumeType[0]] * 0.4f - 30f);
         audioMixer.SetFloat("BGM", volumes[VolumeType[1]] * 0.4f - 30f);
         audioMixer.SetFloat("SFX", volumes[VolumeType[2]] * 0.4f - 30f);
-        for (int i = 0; i < volumes.Count; ++i)
-        {
-            slider[i].value = volumes[VolumeType[i]];
-        }
-    }
-
-    private void Update()
-    {
-        for(int i = 0;i<text.Count;++i)
-        {
-            text[i].text = volumes[VolumeType[i]].ToString();
-        }
     }
     public void SetMasterVolume(float value)
     {
         var sound = value * 0.4f - 30f;
-        if(sound == -30f)
+        if (sound == -30f)
         {
             audioMixer.SetFloat("Master", -80f);
         }
