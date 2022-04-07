@@ -19,9 +19,11 @@ public class SavePoint : MonoBehaviour, IInteraction
         {
             PlayerController2 myPlayer = target.GetComponent<PlayerController2>();
             //GameManager.instance.SetSavepoint(gameObject);
-            myPlayer.tempSaveSpot = spotNumber;
-            //print("새로운 세이브 포인트를 지정했습니다.");
-            myPlayer.MovetoSpot(insideBuilding.position);
+            if (myPlayer != null)
+            {
+                myPlayer.tempSaveSpot = spotNumber;
+                myPlayer.MovetoSpot(insideBuilding.position);
+            }
         }
     }
 }

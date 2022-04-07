@@ -10,7 +10,7 @@ public class Door : MonoBehaviour, IInteraction
         {
             PlayerController2 myPlayer = target.GetComponent<PlayerController2>();
             //GameManager.instance.SetSavepoint(gameObject);
-            myPlayer.MovetoSpot(WorldController.Instance.savePoints[WorldController.Instance.saveSpot].transform.position);
+            myPlayer.MovetoSpot(WorldController.Instance.savePoints[myPlayer.tempSaveSpot].transform.position);
         }
     }
 }
