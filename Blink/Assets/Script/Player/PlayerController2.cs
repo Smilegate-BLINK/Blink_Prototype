@@ -16,7 +16,7 @@ public class PlayerController2 : MonoBehaviour
     public PhysicsMaterial2D slipperPM;
 
     [Header("이동속도")]
-    public float speed = 4f;
+    public float speed = 5f;
     [Header("점프력")]
     public float jumpForce = 12f;
     [Header("버튼 누름에 따른 점프력 차이")]
@@ -96,17 +96,19 @@ public class PlayerController2 : MonoBehaviour
     {
         if (myWall.hitWall && !myGround.canMove)
         {
-            if (myWall.hitRightWall && horizontal < 0 && Input.GetButtonDown("Jump"))
+            if (myWall.hitRightWall && horizontal < 0 && Input.GetKeyDown(KeyCode.Space))
                 myRigid.AddForce(new Vector2(-speed, jumpForce), ForceMode2D.Impulse);
-            else if (myWall.hitLeftWall && horizontal > 0 && Input.GetButtonDown("Jump"))
+            else if (myWall.hitLeftWall && horizontal > 0 && Input.GetKeyDown(KeyCode.Space))
                 myRigid.AddForce(new Vector2(speed, jumpForce), ForceMode2D.Impulse);
         }
     }
 
     public void MovetoSpot(Vector2 pos)
     {
+        // 화면 페이드아웃
         transform.position = pos;
         myRigid.velocity = Vector2.zero;
         CameraController.Instance.SetCameraPos();
+        // 화면 페이드인
     }
 }

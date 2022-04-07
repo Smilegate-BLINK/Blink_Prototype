@@ -10,10 +10,11 @@ public class GroundCheck : MonoBehaviour
     public bool isGrounded;
     public bool isSlippered;
     public bool isSloped;
+    public bool isSuperJump;
 
     private void Update()
     {
-        canMove = isGrounded || isSlippered;
+        canMove = isGrounded || isSlippered || isSuperJump;
         canJump = isGrounded || isSloped || isSlippered;
 
         if (isGrounded && isSloped)
@@ -37,6 +38,9 @@ public class GroundCheck : MonoBehaviour
                 case "Slipper":
                     isSlippered = true;
                     break;
+                case "SuperJump":
+                    isSuperJump = true;
+                    break;
                 default:
                     Debug.LogError(collision.tag);
                     break;
@@ -56,6 +60,9 @@ public class GroundCheck : MonoBehaviour
                 break;
             case "Slipper":
                 isSlippered = false;
+                break;
+            case "SuperJump":
+                isSuperJump = false;
                 break;
             default:
                 break;

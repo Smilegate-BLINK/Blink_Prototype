@@ -12,6 +12,7 @@ TagManager:
   - Destructer
   - GroundCheck
   - SavePoint
+  - SuperJump
   layers:
   - Default
   - TransparentFX
