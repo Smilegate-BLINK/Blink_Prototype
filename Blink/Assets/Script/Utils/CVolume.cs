@@ -12,17 +12,25 @@ public class CVolume : MonoBehaviour
     private List<Slider> slider;
     private Dictionary<string, int> volumeSetting;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         volumeSetting = FindObjectOfType<VolumeSetting>().Volumes;
+    }
+
+    private void OnEnable()
+    {
+        for(int i =0;i<slider.Count;++i)
+        {
+            slider[i].value = volumeSetting[VolumeSetting.VolumeType[i]];
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        for (int i = 0; i < volumeSetting.Count; ++i)
+        for (int i = 0; i < text.Count; ++i)
         {
-            slider[i].value = volumeSetting[VolumeSetting.VolumeType[i]];
+            text[i].text = ((int)volumeSetting[VolumeSetting.VolumeType[i]]).ToString();
         }
     }
 }

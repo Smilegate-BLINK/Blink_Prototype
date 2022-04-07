@@ -162,10 +162,10 @@ RectTransform:
   m_Father: {fileID: 4625651993068385025}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -670.5, y: 237.5}
-  m_SizeDelta: {x: -1741, y: -715}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 300, y: -150}
+  m_SizeDelta: {x: 200, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2769378093622799844
 CanvasRenderer:
@@ -1056,10 +1056,10 @@ RectTransform:
   m_Father: {fileID: 4625651993068385025}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 700, y: -250}
-  m_SizeDelta: {x: -1881, y: -715}
+  m_SizeDelta: {x: 60, y: 60}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &4625651991941927915
 MonoBehaviour:
@@ -2195,8 +2195,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4625651993411183029}
-        m_TargetAssemblyTypeName: KeySetting, Assembly-CSharp
+      - m_Target: {fileID: 1260286514}
+        m_TargetAssemblyTypeName: CKey, Assembly-CSharp
         m_MethodName: ExchangeNewKey
         m_Mode: 3
         m_Arguments:
@@ -2343,10 +2343,10 @@ RectTransform:
   m_Father: {fileID: 4625651993068385025}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 500, y: -120}
-  m_SizeDelta: {x: -1791, y: -715}
+  m_SizeDelta: {x: 150, y: 60}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &4625651992381243302
 CanvasRenderer:
@@ -2959,6 +2959,7 @@ GameObject:
   - component: {fileID: 4625651992624633755}
   - component: {fileID: 4625651992624633764}
   - component: {fileID: 4625651992624633765}
+  - component: {fileID: 1260286514}
   m_Layer: 5
   m_Name: KeyPanel
   m_TagString: Untagged
@@ -3028,6 +3029,24 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1260286514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4625651992624633752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec5f420de804f3140a882d121424a041, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  btnText:
+  - {fileID: 4625651993591006348}
+  - {fileID: 4625651993396866057}
+  - {fileID: 4625651992131867274}
+  - {fileID: 4625651992713253844}
+  - {fileID: 4625651993602635964}
 --- !u!1 &4625651992627120374
 GameObject:
   m_ObjectHideFlags: 0
@@ -3308,6 +3327,7 @@ GameObject:
   - component: {fileID: 4625651992723016902}
   - component: {fileID: 4625651992723016896}
   - component: {fileID: 4625651992723016897}
+  - component: {fileID: 1207265694}
   m_Layer: 5
   m_Name: ResolutionPanel
   m_TagString: Untagged
@@ -3373,6 +3393,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1207265694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4625651992723016903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5c39ffd6612a114eb2676467aa89150, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropdown: {fileID: 7202804601477811336}
+  toggles:
+  - {fileID: 4625651993081239130}
+  - {fileID: 4625651991941927915}
 --- !u!1 &4625651992755409541
 GameObject:
   m_ObjectHideFlags: 0
@@ -3567,8 +3603,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4625651993411183029}
-        m_TargetAssemblyTypeName: KeySetting, Assembly-CSharp
+      - m_Target: {fileID: 1260286514}
+        m_TargetAssemblyTypeName: CKey, Assembly-CSharp
         m_MethodName: ExchangeNewKey
         m_Mode: 3
         m_Arguments:
@@ -4181,10 +4217,10 @@ RectTransform:
   m_Father: {fileID: 4625651993068385025}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 500, y: -250}
-  m_SizeDelta: {x: -1791, y: -715}
+  m_SizeDelta: {x: 150, y: 60}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &4625651992971668692
 CanvasRenderer:
@@ -4465,10 +4501,10 @@ RectTransform:
   m_Father: {fileID: 4625651993068385025}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 700, y: -120}
-  m_SizeDelta: {x: -1881, y: -715}
+  m_SizeDelta: {x: 60, y: 60}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &4625651993081239130
 MonoBehaviour:
@@ -4884,8 +4920,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4625651993411183029}
-        m_TargetAssemblyTypeName: KeySetting, Assembly-CSharp
+      - m_Target: {fileID: 1260286514}
+        m_TargetAssemblyTypeName: CKey, Assembly-CSharp
         m_MethodName: ExchangeNewKey
         m_Mode: 3
         m_Arguments:
@@ -5175,8 +5211,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4625651993411183029}
-        m_TargetAssemblyTypeName: KeySetting, Assembly-CSharp
+      - m_Target: {fileID: 1260286514}
+        m_TargetAssemblyTypeName: CKey, Assembly-CSharp
         m_MethodName: ExchangeNewKey
         m_Mode: 3
         m_Arguments:
@@ -5763,8 +5799,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4625651993411183029}
-        m_TargetAssemblyTypeName: KeySetting, Assembly-CSharp
+      - m_Target: {fileID: 1260286514}
+        m_TargetAssemblyTypeName: CKey, Assembly-CSharp
         m_MethodName: ExchangeNewKey
         m_Mode: 3
         m_Arguments:
@@ -6380,10 +6416,10 @@ RectTransform:
   m_Father: {fileID: 4625651993068385025}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 700, y: -400}
-  m_SizeDelta: {x: -1841, y: -725}
+  m_SizeDelta: {x: 100, y: 50}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &7129645231901600741
 CanvasRenderer:
