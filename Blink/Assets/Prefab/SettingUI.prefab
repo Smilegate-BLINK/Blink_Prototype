@@ -1110,7 +1110,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 4870106284040515803}
         m_TargetAssemblyTypeName: ResolutionSetting, Assembly-CSharp
-        m_MethodName: ChangeResolution
+        m_MethodName: ChangeScreenMode
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -47,8 +47,7 @@ void Start()
 
     public void AcceptResolution()
     {
-        userResolution = new KeyValuePair<int, ScreenMode>(resolutionIndex, screenMode);
-        print(string.Format("AcceptResolution {0} - {1}", userResolution.Key, userResolution.Value));
+        UserResolution = new KeyValuePair<int, ScreenMode>(resolutionIndex, screenMode);
         UIManager.instance.ChangeScreenResolution(DefaultResolution[resolutionIndex], screenMode);
     }
 

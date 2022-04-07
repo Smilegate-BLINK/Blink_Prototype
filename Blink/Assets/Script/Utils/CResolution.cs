@@ -20,7 +20,6 @@ public class CResolution : MonoBehaviour
 
     private void OnEnable()
     {
-        print(string.Format("OnEnable {0} - {1}", resolutionSetting.UserResolution.Key, resolutionSetting.UserResolution.Value));
         dropdown.value = resolutionSetting.UserResolution.Key;
         toggles[(int)resolutionSetting.UserResolution.Value].isOn = true;
     }
