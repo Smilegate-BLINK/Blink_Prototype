@@ -3564,6 +3564,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: BasicGround
       objectReference: {fileID: 0}
+    - target: {fileID: 6012414300625514468, guid: f94d9dc3fbd89224aa4018a0c5a58a1f, type: 3}
+      propertyPath: m_Size.x
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 6012414300625514468, guid: f94d9dc3fbd89224aa4018a0c5a58a1f, type: 3}
+      propertyPath: m_Size.y
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6012414300625514470, guid: f94d9dc3fbd89224aa4018a0c5a58a1f, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -4628,7 +4636,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2859108532869219748, guid: 781cebab726ed254e8a77f297330d370, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.62
+      value: -3.36
       objectReference: {fileID: 0}
     - target: {fileID: 2859108532869219748, guid: 781cebab726ed254e8a77f297330d370, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5087,6 +5095,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 154382413, guid: 4c48227c624d25b4480ca8d3fdd1a1d7, type: 3}
+      propertyPath: deltaInteract
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7260623418145812545, guid: 4c48227c624d25b4480ca8d3fdd1a1d7, type: 3}
       propertyPath: m_TagString
       value: GroundCheck

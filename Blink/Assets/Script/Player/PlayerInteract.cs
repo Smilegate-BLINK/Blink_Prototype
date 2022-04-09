@@ -5,13 +5,21 @@ using UnityEngine;
 
 public class PlayerInteract : MonoBehaviour
 {
-    [Header("다음 상호작용까지 걸리는 시간")]
-    public float deltaInteract;
-    private float interactTime;
+    private bool canInterat;
+
     private void Start()
     {
-        interactTime = 0f;
+        canInterat = false;
     }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+            canInterat = true;
+        if (Input.GetKeyUp(KeyCode.UpArrow))
+            canInterat = false;
+    }
+
     //아이템 충돌 실행 함수
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -25,13 +33,13 @@ public class PlayerInteract : MonoBehaviour
     //상호작용 트리거 함수
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (Input.GetKey(KeyCode.UpArrow) && interactTime + deltaInteract < Time.realtimeSinceStartup)
+        if (canInterat)
         {
             IInteraction interaction = collision.GetComponent<IInteraction>();
             if (interaction != null)
             {
-                interactTime = Time.realtimeSinceStartup;
                 interaction.Interact(gameObject);
+                canInterat = false;
             }
         }
     }
