@@ -36,8 +36,8 @@ public class PlayerController2 : MonoBehaviour
         if (!GameManager.instance.isNewGame)
         {
             PlayerInfo info = GameManager.instance.fileIOHelper.LoadJsonFile<PlayerInfo>(Application.dataPath + "/DataFiles", "PlayerInfo");
-            gameObject.transform.position = info.position;
-            gameObject.transform.rotation = info.rotation;
+            WorldController.Instance.saveSpot = info.saveSpot;
+            gameObject.transform.position = WorldController.Instance.savePoints[info.saveSpot].transform.position;
         }
     }
 
@@ -110,5 +110,12 @@ public class PlayerController2 : MonoBehaviour
         myRigid.velocity = Vector2.zero;
         CameraController.Instance.SetCameraPos();
         // 화면 페이드인
+    }
+
+    private void OnApplicationQuit()
+    {
+        PlayerInfo info = new PlayerInfo(this);
+        var jsonData = JsonUtility.ToJson(info);
+        GameManager.instance.fileIOHelper.CreateJsonFile(Application.dataPath + "/DataFiles", "PlayerInfo", jsonData);
     }
 }
