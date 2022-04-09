@@ -7,13 +7,13 @@ public class ButtonFunctions : MonoBehaviour
 {
     public void LoadNewGame()
     {
-        SceneManager.LoadSceneAsync("PlayerWorld 1");
+        SceneManager.LoadSceneAsync("PlayerWorld");
     }
 
     public void LoadContinueGame()
     {
         GameManager.instance.isNewGame = false;
-        SceneManager.LoadSceneAsync("PlayerWorld 1");
+        SceneManager.LoadSceneAsync("PlayerWorld");
     }
 
     public void LoadSettingUI()
