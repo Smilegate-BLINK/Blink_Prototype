@@ -37,7 +37,7 @@ public class PlayerController2 : MonoBehaviour
         {
             PlayerInfo info = GameManager.instance.fileIOHelper.LoadJsonFile<PlayerInfo>(Application.dataPath + "/DataFiles", "PlayerInfo");
             WorldController.Instance.saveSpot = info.saveSpot;
-            gameObject.transform.position = WorldController.Instance.savePoints[info.saveSpot].transform.position;
+            MovetoSpot(WorldController.Instance.savePoints[info.saveSpot].transform.position);
         }
     }
 
@@ -49,6 +49,7 @@ public class PlayerController2 : MonoBehaviour
         Move();
     }
 
+    // 좌우 입력에 따른 값을 받아오는 함수
     private void GetHorizontalDirection()
     {
         if (Input.GetKey(KeyCode.LeftArrow) && Input.GetKey(KeyCode.RightArrow))
@@ -70,6 +71,7 @@ public class PlayerController2 : MonoBehaviour
             myCol.sharedMaterial = slipperPM;
     }
 
+    // 움직임 구현 함수
     private void Move()
     {
         DoWallJump(horizontal);
@@ -103,6 +105,7 @@ public class PlayerController2 : MonoBehaviour
         }
     }
 
+    // 플레이어가 강제 이동(건물 내부 이동 등)을 당하는 상황일 때 호출되는 함수.
     public void MovetoSpot(Vector2 pos)
     {
         // 화면 페이드아웃
