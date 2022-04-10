@@ -9,6 +9,12 @@ public class GameManager : MonoBehaviour
 
     public FileIOHelper fileIOHelper;
     public bool isNewGame;
+    [HideInInspector]
+    public KeySetting keySetting;
+    [HideInInspector]
+    public VolumeSetting volumeSetting;
+    [HideInInspector]
+    public ResolutionSetting resolutionSetting;
 
     // Start is called before the first frame update
     void Awake()
@@ -35,6 +41,11 @@ public class GameManager : MonoBehaviour
     {
         fileIOHelper = new FileIOHelper();
         isNewGame = true;
+
+        //세팅 값 불러오기
+        keySetting = FindObjectOfType<KeySetting>();
+        volumeSetting = FindObjectOfType<VolumeSetting>();
+        resolutionSetting = FindObjectOfType<ResolutionSetting>();
     }
 
     private void OnApplicationQuit()

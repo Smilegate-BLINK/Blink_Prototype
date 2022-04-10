@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class BackgroundAnimator : MonoBehaviour
 {
+    public float deltaTime;
     public List<Sprite> backgroundImages;
     private Image backImage;
     public GameObject buttons;
@@ -21,7 +22,7 @@ public class BackgroundAnimator : MonoBehaviour
         while (index < backgroundImages.Count)
         {
             backImage.sprite = backgroundImages[index++];
-            yield return new WaitForSeconds(0.3f);
+            yield return new WaitForSeconds(deltaTime);
         }
         buttons.SetActive(true);
     }
