@@ -30,8 +30,13 @@ public class ResolutionSetting : MonoBehaviour
 void Start()
     {
         var fName = string.Format("{0}/{1}.json", Application.dataPath + "/DataFiles", "ResolutionSetting");
-        var jsonData = File.ReadAllText(fName);
-        userResolution = JsonConvert.DeserializeObject<KeyValuePair<int, ScreenMode>>(jsonData);
+        if(File.Exists(fName))
+        {
+            var jsonData = File.ReadAllText(fName);
+            userResolution = JsonConvert.DeserializeObject<KeyValuePair<int, ScreenMode>>(jsonData);
+            UIManager.instance.ChangeScreenResolution(DefaultResolution[userResolution.Key], userResolution.Value);
+        }
+        userResolution = new KeyValuePair<int, ScreenMode>(3, ScreenMode.FULLSCREEN);
         UIManager.instance.ChangeScreenResolution(DefaultResolution[userResolution.Key], userResolution.Value);
     }
 

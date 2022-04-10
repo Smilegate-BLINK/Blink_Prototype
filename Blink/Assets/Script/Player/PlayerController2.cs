@@ -1,6 +1,7 @@
 using Script.Item;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class PlayerController2 : MonoBehaviour
@@ -35,9 +36,13 @@ public class PlayerController2 : MonoBehaviour
 
         if (!GameManager.instance.isNewGame)
         {
-            PlayerInfo info = GameManager.instance.fileIOHelper.LoadJsonFile<PlayerInfo>(Application.dataPath + "/DataFiles", "PlayerInfo");
-            WorldController.Instance.saveSpot = info.saveSpot;
-            MovetoSpot(WorldController.Instance.savePoints[info.saveSpot].transform.position);
+            string fName = string.Format(Application.dataPath + "/DataFiles", "PlayerInfo");
+            if (File.Exists(fName))
+            {
+                PlayerInfo info = GameManager.instance.fileIOHelper.LoadJsonFile<PlayerInfo>(Application.dataPath + "/DataFiles", "PlayerInfo");
+                WorldController.Instance.saveSpot = info.saveSpot;
+                MovetoSpot(WorldController.Instance.savePoints[info.saveSpot].transform.position);
+            }
         }
     }
 

@@ -23,8 +23,9 @@ public class KeySetting : MonoBehaviour
     public Dictionary<KeyAction, KeyCode> UserKey
     {
         get => userKey;
+        private set => userKey = value;
     }
-    private void Start()
+    private void Awake()
     {
         Init();
     }
@@ -32,8 +33,15 @@ public class KeySetting : MonoBehaviour
     private void Init()
     {
         var fName = string.Format("{0}/{1}.json", Application.dataPath + "/DataFiles", "KeySetting");
-        var jsonData = File.ReadAllText(fName);
-        userKey = new Dictionary<KeyAction, KeyCode>(JsonConvert.DeserializeObject<Dictionary<KeyAction, KeyCode>>(jsonData));
+        if(File.Exists(fName))
+        {
+            var jsonData = File.ReadAllText(fName);
+            userKey = new Dictionary<KeyAction, KeyCode>(JsonConvert.DeserializeObject<Dictionary<KeyAction, KeyCode>>(jsonData));
+        }
+        else
+        {
+            UserKey = new Dictionary<KeyAction, KeyCode>(defaultKey);
+        }
     }
 
     public bool CheckKeyOverlap()
