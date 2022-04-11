@@ -16,7 +16,7 @@ public class LadderGroundController : MonoBehaviour
         myCol = GetComponent<BoxCollider2D>();
         playerCol = myPlayer.GetComponent<BoxCollider2D>();
         myCol.enabled = false;
-        float temp = (transform.localScale.y * myCol.size.y + myCol.offset.y + myPlayer.transform.localScale.y * playerCol.size.y + playerCol.offset.y) / 2;
+        float temp = (myCol.size.y / 2 + myCol.offset.y) * transform.localScale.y + (playerCol.size.y / 2 + playerCol.offset.y) * playerCol.transform.localScale.y;
         overPosY = transform.position.y + temp;
         underPosY = transform.position.y - temp;
     }

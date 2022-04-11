@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 7260623418145812546}
   m_Layer: 0
   m_Name: GroundCheck
-  m_TagString: Untagged
+  m_TagString: GroundCheck
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -148,6 +148,7 @@ MonoBehaviour:
   isGrounded: 0
   isSlippered: 0
   isSloped: 0
+  isSuperJump: 0
 --- !u!1 &7260623418375485265
 GameObject:
   m_ObjectHideFlags: 0
@@ -225,7 +226,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
   m_Color: {r: 0.49803922, g: 0.49803922, b: 0.49803922, a: 1}
   m_FlipX: 0
@@ -298,9 +299,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundPM: {fileID: 6200000, guid: bf6fb214e54d5334ea3b078c133662e7, type: 2}
   slipperPM: {fileID: 6200000, guid: 511e786ca0f71c54a98e224033021174, type: 2}
-  speed: 6
+  speed: 5
   jumpForce: 12
   jumpDiff: 0.6
+  tempSaveSpot: 0
 --- !u!114 &7260623418375485262
 MonoBehaviour:
   m_ObjectHideFlags: 0

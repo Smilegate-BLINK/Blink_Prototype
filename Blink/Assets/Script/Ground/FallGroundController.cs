@@ -23,12 +23,12 @@ public class FallGroundController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        
         if (collision.gameObject.tag.Equals("Player"))
         {
             BoxCollider2D playerCol = collision.gameObject.GetComponent<BoxCollider2D>();
-            float temp = (transform.localScale.y * myCol.size.y + myCol.offset.y + collision.transform.localScale.y * playerCol.size.y + playerCol.offset.y) / 2;
+            float temp = (myCol.size.y / 2 + myCol.offset.y) * transform.localScale.y + (playerCol.size.y / 2 + playerCol.offset.y) * collision.transform.localScale.y;
             float overPosY = transform.position.y + temp;
+            Debug.Log(temp);
             if (collision.transform.position.y > overPosY)
             {
                 isTriggerd = true;

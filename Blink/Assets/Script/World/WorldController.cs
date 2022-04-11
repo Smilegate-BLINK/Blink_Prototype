@@ -18,7 +18,7 @@ public class WorldController : MonoBehaviour
 
 
     [Header("눈 감기 매커니즘 실행 여부")]
-    public bool doBlinkFunc = false;
+    public bool doBlinkFunc;
     [SerializeField, Header("맵의 발판들이 흐려지기 시작하는 시간")]
     private float startshadedTime = 1f;
     [SerializeField, Header("맵의 발판들이 완전히 흐려지는데 걸리는 시간")]
@@ -47,14 +47,11 @@ public class WorldController : MonoBehaviour
         myPlayer = GameObject.Find("Player");
         plBlink = myPlayer.GetComponent<PlayerBlink>();
 
+        doBlinkFunc = true;
         worldBlackOut = !plBlink.getEyeOpend();
         worldAlpha = 1f;
 
         isPause = false;
-
-        // 세팅에서 saveSpot 받아오기, 만약 받아오기 실패하면 0으로 설정
-        saveSpot = 0;
-        PlayerMovedToPoint();
     }
 
     // Update is called once per frame
@@ -111,14 +108,6 @@ public class WorldController : MonoBehaviour
         shadedTimeTaken += fDeltaTime;
     }
 
-
-    // 플레이어의 위치를 savePoints[saveSpot]의 위치로 놓아주는 함수.
-    public void PlayerMovedToPoint()
-    {
-        myPlayer.transform.position = savePoints[saveSpot].transform.position;
-        CameraController.Instance.SetCameraPos();
-    }
-
     private void EnterSetting()
     {
         isPause = true;
@@ -132,5 +121,4 @@ public class WorldController : MonoBehaviour
         Time.timeScale = 1f;
         isPause = false;
     }
-
 }
