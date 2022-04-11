@@ -11,9 +11,9 @@ public class PlayerBlink : MonoBehaviour
 
     private bool eyeOpend;
     private bool forcedClose;
-    private float eyetime;
-    private float fctime;
-    
+    private float eyetime;  // 눈을 열고닫는 타이머
+    private float fctime;  // 강제로 눈을 감게 하는 시간 타이머
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -55,6 +55,11 @@ public class PlayerBlink : MonoBehaviour
             fctime = forceClosedTimer;
         }
 
+        if (!WorldController.Instance.doBlinkFunc)
+        {
+            eyetime = 0f;
+            fctime = 0f;
+        }
     }
 
     public bool getEyeOpend()
