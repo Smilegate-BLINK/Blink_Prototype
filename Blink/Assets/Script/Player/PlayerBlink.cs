@@ -18,6 +18,8 @@ public class PlayerBlink : MonoBehaviour
     public Sprite eyeOpenSprite;
     public Sprite eyeClosedSprite;
 
+    private KeySetting keySetting;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -26,6 +28,7 @@ public class PlayerBlink : MonoBehaviour
         eyetime = 0f;
         fctime = forceClosedTimer;
         eyeSprite = transform.GetChild(2).GetComponent<SpriteRenderer>();
+        keySetting = FindObjectOfType<KeySetting>();
     }
 
     // Update is called once per frame
@@ -33,7 +36,7 @@ public class PlayerBlink : MonoBehaviour
     {
         if (!WorldController.Instance.getIsPause())
         {
-            if (Input.GetKeyDown(KeyCode.D))
+            if (Input.GetKeyDown(keySetting.UserKey[KeyAction.BLINK]))
                 eyeOpend = !eyeOpend;
         }
         if (eyeOpend)

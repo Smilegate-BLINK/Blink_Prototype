@@ -1,6 +1,7 @@
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
@@ -19,23 +20,43 @@ public class VolumeSetting : MonoBehaviour
 
     void Start()
     {
-        var fName = string.Format("{0}/{1}.json", Application.dataPath + "/DataFiles", "VolumeSetting");
-        var jsonData = File.ReadAllText(fName);
-        volumes = new Dictionary<string, int>(JsonConvert.DeserializeObject<Dictionary<string, int>>(jsonData));
-        audioMixer.SetFloat("Master", volumes[VolumeType[0]] * 0.4f - 30f);
-        audioMixer.SetFloat("BGM", volumes[VolumeType[1]] * 0.4f - 30f);
-        audioMixer.SetFloat("SFX", volumes[VolumeType[2]] * 0.4f - 30f);
+        var fName = string.Format("{0}/{1}.json", Application.streamingAssetsPath + "/DataFiles", "VolumeSetting");
+        if (File.Exists(fName))
+        {
+            FileStream fileStream = new FileStream(fName, FileMode.Open);
+            byte[] data = new byte[fileStream.Length];
+            fileStream.Read(data, 0, data.Length);
+            fileStream.Close();
+            var jsonData = Encoding.UTF8.GetString(data);
+            volumes = new Dictionary<string, int>(JsonConvert.DeserializeObject<Dictionary<string, int>>(jsonData));
+            for(int i=0;i<VolumeType.Length;++i)
+            {
+                audioMixer.SetFloat(VolumeType[i], volumes[VolumeType[i]] * 0.4f - 30f);
+            }
+        }
+        else
+        {
+            volumes = new Dictionary<string, int>()
+            {
+                { "MASTER", 30 },
+                {"BGM", 30 },
+                {"SFX", 30 }
+            };
+            audioMixer.SetFloat("MASTER", 30f * 0.4f - 30f);
+            audioMixer.SetFloat("BGM", 30f * 0.4f - 30f);
+            audioMixer.SetFloat("SFX", 30f * 0.4f - 30f);
+        }
     }
     public void SetMasterVolume(float value)
     {
         var sound = value * 0.4f - 30f;
         if (sound == -30f)
         {
-            audioMixer.SetFloat("Master", -80f);
+            audioMixer.SetFloat("MASTER", -80f);
         }
         else
         {
-            audioMixer.SetFloat("Master", sound);
+            audioMixer.SetFloat("MASTER", sound);
         }
         volumes[VolumeType[0]] = (int)value;
     }
@@ -67,9 +88,9 @@ public class VolumeSetting : MonoBehaviour
         volumes[VolumeType[2]] = (int)value;
     }
 
-    private void OnApplicationQuit()
+    private void OnDisable()
     {
         var jsonData = JsonConvert.SerializeObject(volumes);
-        GameManager.instance.fileIOHelper.CreateJsonFile(Application.dataPath + "/DataFiles", "VolumeSetting", jsonData);
+        GameManager.instance.fileIOHelper.CreateJsonFile(Application.streamingAssetsPath + "/DataFiles", "VolumeSetting", jsonData);
     }
 }

@@ -5,6 +5,7 @@ using System;
 using Newtonsoft.Json;
 using System.IO;
 using UnityEngine.UI;
+using System.Text;
 
 public enum KeyAction { INTERACT, JUMP, LEFT, RIGHT, BLINK }
 
@@ -23,17 +24,29 @@ public class KeySetting : MonoBehaviour
     public Dictionary<KeyAction, KeyCode> UserKey
     {
         get => userKey;
+        private set => userKey = value;
     }
-    private void Start()
+    private void Awake()
     {
         Init();
     }
 
     private void Init()
     {
-        var fName = string.Format("{0}/{1}.json", Application.dataPath + "/DataFiles", "KeySetting");
-        var jsonData = File.ReadAllText(fName);
-        userKey = new Dictionary<KeyAction, KeyCode>(JsonConvert.DeserializeObject<Dictionary<KeyAction, KeyCode>>(jsonData));
+        var fName = string.Format("{0}/{1}.json", Application.streamingAssetsPath + "/DataFiles", "KeySetting");
+        if(File.Exists(fName))
+        {
+            FileStream fileStream = new FileStream(fName, FileMode.Open);
+            byte[] data = new byte[fileStream.Length];
+            fileStream.Read(data, 0, data.Length);
+            fileStream.Close();
+            var jsonData = Encoding.UTF8.GetString(data);
+            userKey = new Dictionary<KeyAction, KeyCode>(JsonConvert.DeserializeObject<Dictionary<KeyAction, KeyCode>>(jsonData));
+        }
+        else
+        {
+            UserKey = new Dictionary<KeyAction, KeyCode>(defaultKey);
+        }
     }
 
     public bool CheckKeyOverlap()
@@ -62,10 +75,10 @@ public class KeySetting : MonoBehaviour
         }
     }
 
-    private void OnApplicationQuit()
+    private void OnDisable()
     {
         var jsonData = JsonConvert.SerializeObject(userKey);
-        GameManager.instance.fileIOHelper.CreateJsonFile(Application.dataPath + "/DataFiles", "KeySetting", jsonData);
+        GameManager.instance.fileIOHelper.CreateJsonFile(Application.streamingAssetsPath + "/DataFiles", "KeySetting", jsonData);
     }
 
 }

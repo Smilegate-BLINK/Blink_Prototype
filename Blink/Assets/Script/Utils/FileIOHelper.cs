@@ -8,7 +8,7 @@ public class FileIOHelper
 {
     public void CreateJsonFile(string path, string fName, string json)
     {
-        FileStream stream = new FileStream(string.Format("{0}/{1}.json", path, fName), FileMode.OpenOrCreate);
+        FileStream stream = new FileStream(string.Format("{0}/{1}.json", path, fName), FileMode.Create);
         byte[] data = Encoding.UTF8.GetBytes(json);
         stream.Write(data, 0, data.Length);
         stream.Close();
