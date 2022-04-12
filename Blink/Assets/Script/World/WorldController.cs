@@ -121,7 +121,7 @@ public class WorldController : MonoBehaviour
         UIManager.instance.SetActiveSettingUI(true);
     }
 
-    private void ExitSetting()
+    public void ExitSetting()
     {
         UIManager.instance.SetActiveSettingUI(false);
         Time.timeScale = 1f;
