@@ -44,6 +44,7 @@ public class WorldController : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        UIManager.instance.SetActiveSettingUI(false);
         myPlayer = GameObject.Find("Player");
         plBlink = myPlayer.GetComponent<PlayerBlink>();
 
@@ -98,6 +99,11 @@ public class WorldController : MonoBehaviour
         return worldBlackOut;
     }
 
+    public bool getIsPause()
+    {
+        return isPause;
+    }    
+
     public float getWorldAlpha()
     {
         return worldAlpha;
@@ -112,12 +118,12 @@ public class WorldController : MonoBehaviour
     {
         isPause = true;
         Time.timeScale = 0f;
-        // 설정창 띄우기
+        UIManager.instance.SetActiveSettingUI(true);
     }
 
     private void ExitSetting()
     {
-        //설정창 닫기
+        UIManager.instance.SetActiveSettingUI(false);
         Time.timeScale = 1f;
         isPause = false;
     }

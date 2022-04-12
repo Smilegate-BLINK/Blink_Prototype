@@ -42,7 +42,6 @@ public class GroundCheck : MonoBehaviour
                     isSuperJump = true;
                     break;
                 default:
-                    Debug.LogError(collision.tag);
                     break;
             }
         }

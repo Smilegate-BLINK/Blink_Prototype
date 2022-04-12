@@ -14,9 +14,14 @@ public class PlayerInteract : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-            canInterat = true;
-        if (Input.GetKeyUp(KeyCode.UpArrow))
+        if (!WorldController.Instance.getIsPause())
+        {
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+                canInterat = true;
+            if (Input.GetKeyUp(KeyCode.UpArrow))
+                canInterat = false;
+        }
+        else
             canInterat = false;
     }
 

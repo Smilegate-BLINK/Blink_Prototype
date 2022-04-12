@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class PlayerController2 : MonoBehaviour
 {
+    private Animator myAnim;
     private BoxCollider2D myCol;
     private Rigidbody2D myRigid;
     private GroundCheck myGround;
@@ -28,6 +29,7 @@ public class PlayerController2 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        myAnim = GetComponent<Animator>();
         myCol = GetComponent<BoxCollider2D>();
         myRigid = GetComponent<Rigidbody2D>();
         myGround = transform.GetChild(0).GetComponent<GroundCheck>();
@@ -44,9 +46,13 @@ public class PlayerController2 : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        GetHorizontalDirection();
-        ChangeFriction();
-        Move();
+        if (WorldController.Instance.getIsPause() == false)
+        {
+            GetHorizontalDirection();
+            ChangeFriction();
+            Move();
+            PlayerAnimation();
+        }
     }
 
     // 좌우 입력에 따른 값을 받아오는 함수
@@ -103,6 +109,14 @@ public class PlayerController2 : MonoBehaviour
             else if (myWall.hitLeftWall && horizontal > 0 && Input.GetKeyDown(KeyCode.Space))
                 myRigid.AddForce(new Vector2(speed, jumpForce), ForceMode2D.Impulse);
         }
+    }
+
+    private void PlayerAnimation()
+    {
+        if (myRigid.velocity.x < -0.1f && transform.localScale.x > 0f)
+            transform.localScale = transform.localScale - new Vector3(transform.localScale.x * 2, 0f, 0f);
+        if (myRigid.velocity.x > 0.1f && transform.localScale.x < 0f)
+            transform.localScale = transform.localScale - new Vector3(transform.localScale.x * 2, 0f, 0f);
     }
 
     // 플레이어가 강제 이동(건물 내부 이동 등)을 당하는 상황일 때 호출되는 함수.
