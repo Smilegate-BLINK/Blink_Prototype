@@ -1,6 +1,7 @@
 using Script.Item;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class PlayerController2 : MonoBehaviour
@@ -28,6 +29,8 @@ public class PlayerController2 : MonoBehaviour
     [HideInInspector]
     public int tempSaveSpot = 0;
 
+    private KeySetting keySetting;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,13 +39,21 @@ public class PlayerController2 : MonoBehaviour
         myRigid = GetComponent<Rigidbody2D>();
         myGround = transform.GetChild(0).GetComponent<GroundCheck>();
         myWall = transform.GetChild(1).GetComponent<WallCheck>();
+<<<<<<< HEAD
         myBlink = GetComponent<PlayerBlink>();
+=======
+        keySetting = FindObjectOfType<KeySetting>();
+>>>>>>> b5a1f89338fec326b649848c78c55be6106e9b84
 
         if (!GameManager.instance.isNewGame)
         {
-            PlayerInfo info = GameManager.instance.fileIOHelper.LoadJsonFile<PlayerInfo>(Application.dataPath + "/DataFiles", "PlayerInfo");
-            WorldController.Instance.saveSpot = info.saveSpot;
-            MovetoSpot(WorldController.Instance.savePoints[info.saveSpot].transform.position);
+            string fName = string.Format(Application.streamingAssetsPath + "/DataFiles", "PlayerInfo");
+            if (File.Exists(fName))
+            {
+                PlayerInfo info = GameManager.instance.fileIOHelper.LoadJsonFile<PlayerInfo>(Application.streamingAssetsPath + "/DataFiles", "PlayerInfo");
+                WorldController.Instance.saveSpot = info.saveSpot;
+                MovetoSpot(WorldController.Instance.savePoints[info.saveSpot].transform.position);
+            }
         }
     }
 
@@ -61,11 +72,11 @@ public class PlayerController2 : MonoBehaviour
     // 좌우 입력에 따른 값을 받아오는 함수
     private void GetHorizontalDirection()
     {
-        if (Input.GetKey(KeyCode.LeftArrow) && Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetKey(keySetting.UserKey[KeyAction.LEFT]) && Input.GetKey(keySetting.UserKey[KeyAction.RIGHT]))
             horizontal = 0;
-        else if (Input.GetKey(KeyCode.LeftArrow))
+        else if (Input.GetKey(keySetting.UserKey[KeyAction.LEFT]))
             horizontal = -1;
-        else if (Input.GetKey(KeyCode.RightArrow))
+        else if (Input.GetKey(keySetting.UserKey[KeyAction.RIGHT]))
             horizontal = 1;
         else
             horizontal = 0;
@@ -95,10 +106,10 @@ public class PlayerController2 : MonoBehaviour
         }
 
         // 점프 및 점프키 누름 정도에 따라 점프력 결정
-        if (myGround.canJump && Input.GetKeyDown(KeyCode.Space))
+        if (myGround.canJump && Input.GetKeyDown(keySetting.UserKey[KeyAction.JUMP]))
             myRigid.AddForce(new Vector2(myRigid.velocity.x, jumpForce), ForceMode2D.Impulse);
 
-        if (Input.GetKeyUp(KeyCode.Space) && myRigid.velocity.y > 0f)
+        if (Input.GetKeyUp(keySetting.UserKey[KeyAction.JUMP]) && myRigid.velocity.y > 0f)
             myRigid.velocity = (new Vector2(myRigid.velocity.x, myRigid.velocity.y * jumpDiff));
     }
 
@@ -107,9 +118,9 @@ public class PlayerController2 : MonoBehaviour
     {
         if (myWall.hitWall && !myGround.canMove)
         {
-            if (myWall.hitRightWall && horizontal < 0 && Input.GetKeyDown(KeyCode.Space))
+            if (myWall.hitRightWall && horizontal < 0 && Input.GetKeyDown(keySetting.UserKey[KeyAction.JUMP]))
                 myRigid.AddForce(new Vector2(-speed, jumpForce), ForceMode2D.Impulse);
-            else if (myWall.hitLeftWall && horizontal > 0 && Input.GetKeyDown(KeyCode.Space))
+            else if (myWall.hitLeftWall && horizontal > 0 && Input.GetKeyDown(keySetting.UserKey[KeyAction.JUMP]))
                 myRigid.AddForce(new Vector2(speed, jumpForce), ForceMode2D.Impulse);
         }
     }
@@ -157,6 +168,6 @@ public class PlayerController2 : MonoBehaviour
     {
         PlayerInfo info = new PlayerInfo(this);
         var jsonData = JsonUtility.ToJson(info);
-        GameManager.instance.fileIOHelper.CreateJsonFile(Application.dataPath + "/DataFiles", "PlayerInfo", jsonData);
+        GameManager.instance.fileIOHelper.CreateJsonFile(Application.streamingAssetsPath + "/DataFiles", "PlayerInfo", jsonData);
     }
 }

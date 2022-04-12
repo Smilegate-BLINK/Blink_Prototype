@@ -14,8 +14,7 @@ namespace Script.Item
 
         public void Use(GameObject target)
         {
-            WorldController controller = FindObjectOfType<WorldController>();
-            controller.IncreaseShadeTime(0.1f);
+            WorldController.Instance.IncreaseShadeTime(0.1f);
             Destroy(gameObject);
         }
     }

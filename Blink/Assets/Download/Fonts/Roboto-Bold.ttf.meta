@@ -1,4 +1,7 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
+guid: f4d0ee7505db34f42806c31ca09dc1bf
+=======
 guid: d52a51df45e40f54ab1f857a45457797
 TrueTypeFontImporter:
   externalObjects: {}
@@ -24,3 +27,4 @@ TrueTypeFontImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+>>>>>>> main

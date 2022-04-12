@@ -2,6 +2,7 @@ using Script.Item;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,14 +10,20 @@ public class GameManager : MonoBehaviour
 
     public FileIOHelper fileIOHelper;
     public bool isNewGame;
+    [HideInInspector]
+    public KeySetting keySetting;
+    [HideInInspector]
+    public VolumeSetting volumeSetting;
+    [HideInInspector]
+    public ResolutionSetting resolutionSetting;
 
     // Start is called before the first frame update
     void Awake()
     {
         if(instance == null)
         {
-            Init();
             instance = this;
+            SceneManager.sceneLoaded += Init;
             DontDestroyOnLoad(gameObject);
         }
         else
@@ -25,19 +32,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    private void Init()
+    private void Init(Scene scene, LoadSceneMode mode)
     {
         fileIOHelper = new FileIOHelper();
         isNewGame = true;
-    }
 
-    private void OnApplicationQuit()
-    {
+        //세팅 값 불러오기
+        keySetting = FindObjectOfType<KeySetting>();
+        volumeSetting = FindObjectOfType<VolumeSetting>();
+        resolutionSetting = FindObjectOfType<ResolutionSetting>();
     }
 }

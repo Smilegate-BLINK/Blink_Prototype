@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
@@ -13,10 +14,10 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        Init();
         if (instance == null)
         {
             instance = this;
+            SceneManager.sceneLoaded += Init;
             DontDestroyOnLoad(gameObject);
         }
         else
@@ -24,8 +25,8 @@ public class UIManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-    private void Init()
+    
+    private void Init(Scene scene, LoadSceneMode mode)
     {
         SettingUI = GameObject.Find("SettingUI").transform.Find("Canvas").gameObject;
     }
