@@ -23,7 +23,6 @@ public class SuperJumpGroundController : MonoBehaviour
         rotationZ = transform.rotation.eulerAngles.z * Mathf.PI / 180;
         forceToX = Mathf.Sin(rotationZ) * jumpHeight;
         forceToY = Mathf.Cos(rotationZ) * jumpHeight;
-        Debug.Log(forceToX);
         if (collision.transform.tag == "Player" && !isUsed)
         {
             Rigidbody2D colRigid = collision.gameObject.GetComponent<Rigidbody2D>();
