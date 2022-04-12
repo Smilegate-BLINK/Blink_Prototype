@@ -6,19 +6,21 @@ using UnityEngine;
 public class PlayerInteract : MonoBehaviour
 {
     private bool canInterat;
+    private KeySetting keySetting;
 
     private void Start()
     {
         canInterat = false;
+        keySetting = FindObjectOfType<KeySetting>();
     }
 
     private void Update()
     {
         if (!WorldController.Instance.getIsPause())
         {
-            if (Input.GetKeyDown(KeyCode.UpArrow))
+            if (Input.GetKeyDown(keySetting.UserKey[KeyAction.INTERACT]))
                 canInterat = true;
-            if (Input.GetKeyUp(KeyCode.UpArrow))
+            if (Input.GetKeyUp(keySetting.UserKey[KeyAction.INTERACT]))
                 canInterat = false;
         }
         else
