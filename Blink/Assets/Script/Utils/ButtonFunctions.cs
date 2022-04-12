@@ -39,6 +39,10 @@ public class ButtonFunctions : MonoBehaviour
     {
         GameManager.instance.keySetting.CheckKeyOverlap();
         UIManager.instance.SetActiveSettingUI(false);
+        if(SceneManager.GetActiveScene().name == "PlayerWorld")
+        {
+            WorldController.Instance.ExitSetting();
+        }
     }
 
 }
