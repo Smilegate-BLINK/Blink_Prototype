@@ -36,10 +36,10 @@ public class PlayerController2 : MonoBehaviour
 
         if (!GameManager.instance.isNewGame)
         {
-            string fName = string.Format(Application.dataPath + "/DataFiles", "PlayerInfo");
+            string fName = string.Format(Application.streamingAssetsPath + "/DataFiles", "PlayerInfo");
             if (File.Exists(fName))
             {
-                PlayerInfo info = GameManager.instance.fileIOHelper.LoadJsonFile<PlayerInfo>(Application.dataPath + "/DataFiles", "PlayerInfo");
+                PlayerInfo info = GameManager.instance.fileIOHelper.LoadJsonFile<PlayerInfo>(Application.streamingAssetsPath + "/DataFiles", "PlayerInfo");
                 WorldController.Instance.saveSpot = info.saveSpot;
                 MovetoSpot(WorldController.Instance.savePoints[info.saveSpot].transform.position);
             }
@@ -124,6 +124,6 @@ public class PlayerController2 : MonoBehaviour
     {
         PlayerInfo info = new PlayerInfo(this);
         var jsonData = JsonUtility.ToJson(info);
-        GameManager.instance.fileIOHelper.CreateJsonFile(Application.dataPath + "/DataFiles", "PlayerInfo", jsonData);
+        GameManager.instance.fileIOHelper.CreateJsonFile(Application.streamingAssetsPath + "/DataFiles", "PlayerInfo", jsonData);
     }
 }

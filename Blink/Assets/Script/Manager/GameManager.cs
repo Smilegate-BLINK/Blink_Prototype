@@ -2,6 +2,7 @@ using Script.Item;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -21,8 +22,8 @@ public class GameManager : MonoBehaviour
     {
         if(instance == null)
         {
-            Init();
             instance = this;
+            SceneManager.sceneLoaded += Init;
             DontDestroyOnLoad(gameObject);
         }
         else
@@ -31,13 +32,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    private void Init()
+    private void Init(Scene scene, LoadSceneMode mode)
     {
         fileIOHelper = new FileIOHelper();
         isNewGame = true;
@@ -46,9 +41,5 @@ public class GameManager : MonoBehaviour
         keySetting = FindObjectOfType<KeySetting>();
         volumeSetting = FindObjectOfType<VolumeSetting>();
         resolutionSetting = FindObjectOfType<ResolutionSetting>();
-    }
-
-    private void OnApplicationQuit()
-    {
     }
 }

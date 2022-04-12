@@ -5,6 +5,7 @@ using System;
 using Newtonsoft.Json;
 using System.IO;
 using UnityEngine.UI;
+using System.Text;
 
 public enum KeyAction { INTERACT, JUMP, LEFT, RIGHT, BLINK }
 
@@ -32,10 +33,14 @@ public class KeySetting : MonoBehaviour
 
     private void Init()
     {
-        var fName = string.Format("{0}/{1}.json", Application.dataPath + "/DataFiles", "KeySetting");
+        var fName = string.Format("{0}/{1}.json", Application.streamingAssetsPath + "/DataFiles", "KeySetting");
         if(File.Exists(fName))
         {
-            var jsonData = File.ReadAllText(fName);
+            FileStream fileStream = new FileStream(fName, FileMode.Open);
+            byte[] data = new byte[fileStream.Length];
+            fileStream.Read(data, 0, data.Length);
+            fileStream.Close();
+            var jsonData = Encoding.UTF8.GetString(data);
             userKey = new Dictionary<KeyAction, KeyCode>(JsonConvert.DeserializeObject<Dictionary<KeyAction, KeyCode>>(jsonData));
         }
         else
@@ -73,7 +78,7 @@ public class KeySetting : MonoBehaviour
     private void OnApplicationQuit()
     {
         var jsonData = JsonConvert.SerializeObject(userKey);
-        GameManager.instance.fileIOHelper.CreateJsonFile(Application.dataPath + "/DataFiles", "KeySetting", jsonData);
+        GameManager.instance.fileIOHelper.CreateJsonFile(Application.streamingAssetsPath + "/DataFiles", "KeySetting", jsonData);
     }
 
 }

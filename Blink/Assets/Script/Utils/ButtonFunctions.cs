@@ -23,7 +23,7 @@ public class ButtonFunctions : MonoBehaviour
 
     public void LoadCredit()
     {
-
+        SceneManager.LoadScene("Credit");
     }
     
     public void QuitGame()
@@ -37,8 +37,8 @@ public class ButtonFunctions : MonoBehaviour
 
     public void QuitSetting()
     {
-        UIManager.instance.SetActiveSettingUI(false);
         GameManager.instance.keySetting.CheckKeyOverlap();
+        UIManager.instance.SetActiveSettingUI(false);
     }
 
 }

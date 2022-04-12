@@ -1,6 +1,7 @@
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
@@ -19,10 +20,14 @@ public class VolumeSetting : MonoBehaviour
 
     void Start()
     {
-        var fName = string.Format("{0}/{1}.json", Application.dataPath + "/DataFiles", "VolumeSetting");
+        var fName = string.Format("{0}/{1}.json", Application.streamingAssetsPath + "/DataFiles", "VolumeSetting");
         if (File.Exists(fName))
         {
-            var jsonData = File.ReadAllText(fName);
+            FileStream fileStream = new FileStream(fName, FileMode.Open);
+            byte[] data = new byte[fileStream.Length];
+            fileStream.Read(data, 0, data.Length);
+            fileStream.Close();
+            var jsonData = Encoding.UTF8.GetString(data);
             volumes = new Dictionary<string, int>(JsonConvert.DeserializeObject<Dictionary<string, int>>(jsonData));
             for(int i=0;i<VolumeType.Length;++i)
             {
@@ -86,6 +91,6 @@ public class VolumeSetting : MonoBehaviour
     private void OnApplicationQuit()
     {
         var jsonData = JsonConvert.SerializeObject(volumes);
-        GameManager.instance.fileIOHelper.CreateJsonFile(Application.dataPath + "/DataFiles", "VolumeSetting", jsonData);
+        GameManager.instance.fileIOHelper.CreateJsonFile(Application.streamingAssetsPath + "/DataFiles", "VolumeSetting", jsonData);
     }
 }
