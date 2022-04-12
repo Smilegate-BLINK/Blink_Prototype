@@ -39,11 +39,8 @@ public class PlayerController2 : MonoBehaviour
         myRigid = GetComponent<Rigidbody2D>();
         myGround = transform.GetChild(0).GetComponent<GroundCheck>();
         myWall = transform.GetChild(1).GetComponent<WallCheck>();
-<<<<<<< HEAD
         myBlink = GetComponent<PlayerBlink>();
-=======
         keySetting = FindObjectOfType<KeySetting>();
->>>>>>> b5a1f89338fec326b649848c78c55be6106e9b84
 
         if (!GameManager.instance.isNewGame)
         {

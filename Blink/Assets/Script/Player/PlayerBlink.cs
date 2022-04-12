@@ -18,13 +18,11 @@ public class PlayerBlink : MonoBehaviour
     public Sprite eyeOpenSprite;
     public Sprite eyeClosedSprite;
 
-<<<<<<< HEAD
     public bool holding;
     public bool sliding;
     private bool changeSpPos;
-=======
+
     private KeySetting keySetting;
->>>>>>> b5a1f89338fec326b649848c78c55be6106e9b84
 
     // Start is called before the first frame update
     private void Start()
@@ -34,12 +32,11 @@ public class PlayerBlink : MonoBehaviour
         eyetime = 0f;
         fctime = forceClosedTimer;
         eyeSprite = transform.GetChild(2).GetComponent<SpriteRenderer>();
-<<<<<<< HEAD
+
         holding = false;
         sliding = false;
-=======
+
         keySetting = FindObjectOfType<KeySetting>();
->>>>>>> b5a1f89338fec326b649848c78c55be6106e9b84
     }
 
     // Update is called once per frame
