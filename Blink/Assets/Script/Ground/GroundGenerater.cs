@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class GroundGenerater : MonoBehaviour
 {
-    public GameObject fallGround;
+    public GameObject Ground;
 
     private GameObject myObject;
     // Start is called before the first frame update
     void Start()
     {
-        myObject = Instantiate(fallGround, this.transform.position, Quaternion.identity);
+        myObject = Instantiate(Ground, this.transform.position, Quaternion.identity);
     }
 
     void Update()
