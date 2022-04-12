@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7391944629327060391}
   - component: {fileID: 7391944629327060390}
+  - component: {fileID: 6695317985772514772}
   m_Layer: 0
   m_Name: BasicSlope
   m_TagString: Slope
@@ -83,6 +84,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6695317985772514772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7391944629327060384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35e295f240f7c294887226b55663d1c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eyeOpenMat: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  eyeCloseMat: {fileID: 2100000, guid: a519c43dc27ecb0429b9499dfd2cab89, type: 2}
+  isChanged: 0
 --- !u!1 &8763911330419859288
 GameObject:
   m_ObjectHideFlags: 0

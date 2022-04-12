@@ -11,6 +11,7 @@ public class PlayerController2 : MonoBehaviour
     private Rigidbody2D myRigid;
     private GroundCheck myGround;
     private WallCheck myWall;
+    private PlayerBlink myBlink;
 
     [HideInInspector]
     public PhysicsMaterial2D groundPM;
@@ -25,6 +26,7 @@ public class PlayerController2 : MonoBehaviour
     public float jumpDiff = 0.6f;
 
     private int horizontal = 0;
+    [HideInInspector]
     public int tempSaveSpot = 0;
 
     private KeySetting keySetting;
@@ -37,7 +39,11 @@ public class PlayerController2 : MonoBehaviour
         myRigid = GetComponent<Rigidbody2D>();
         myGround = transform.GetChild(0).GetComponent<GroundCheck>();
         myWall = transform.GetChild(1).GetComponent<WallCheck>();
+<<<<<<< HEAD
+        myBlink = GetComponent<PlayerBlink>();
+=======
         keySetting = FindObjectOfType<KeySetting>();
+>>>>>>> b5a1f89338fec326b649848c78c55be6106e9b84
 
         if (!GameManager.instance.isNewGame)
         {
@@ -125,6 +131,27 @@ public class PlayerController2 : MonoBehaviour
             transform.localScale = transform.localScale - new Vector3(transform.localScale.x * 2, 0f, 0f);
         if (myRigid.velocity.x > 0.1f && transform.localScale.x < 0f)
             transform.localScale = transform.localScale - new Vector3(transform.localScale.x * 2, 0f, 0f);
+
+        if (myGround.canMove && horizontal == 0)
+            myAnim.SetBool("isWalking", false);
+        if (myGround.canMove && horizontal != 0)
+            myAnim.SetBool("isWalking", true);
+
+        if (myGround.isGrounded)
+            myAnim.SetBool("isJumping", false);
+        if (!myGround.isGrounded)
+            myAnim.SetBool("isJumping", true);
+        if (!myGround.isGrounded && !myWall.hitWall)
+        {
+            myAnim.SetBool("isHolding", false);
+            myBlink.holding = false;
+        }
+        if (!myGround.isGrounded && myWall.hitWall)
+        {
+            myAnim.SetBool("isHolding", true);
+            myBlink.holding = true;
+        }
+            
     }
 
     // 플레이어가 강제 이동(건물 내부 이동 등)을 당하는 상황일 때 호출되는 함수.

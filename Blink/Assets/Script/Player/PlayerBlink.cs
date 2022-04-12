@@ -18,7 +18,13 @@ public class PlayerBlink : MonoBehaviour
     public Sprite eyeOpenSprite;
     public Sprite eyeClosedSprite;
 
+<<<<<<< HEAD
+    public bool holding;
+    public bool sliding;
+    private bool changeSpPos;
+=======
     private KeySetting keySetting;
+>>>>>>> b5a1f89338fec326b649848c78c55be6106e9b84
 
     // Start is called before the first frame update
     private void Start()
@@ -28,7 +34,12 @@ public class PlayerBlink : MonoBehaviour
         eyetime = 0f;
         fctime = forceClosedTimer;
         eyeSprite = transform.GetChild(2).GetComponent<SpriteRenderer>();
+<<<<<<< HEAD
+        holding = false;
+        sliding = false;
+=======
         keySetting = FindObjectOfType<KeySetting>();
+>>>>>>> b5a1f89338fec326b649848c78c55be6106e9b84
     }
 
     // Update is called once per frame
@@ -39,10 +50,7 @@ public class PlayerBlink : MonoBehaviour
             if (Input.GetKeyDown(keySetting.UserKey[KeyAction.BLINK]))
                 eyeOpend = !eyeOpend;
         }
-        if (eyeOpend)
-            eyeSprite.sprite = eyeOpenSprite;
-        else
-            eyeSprite.sprite = eyeClosedSprite;
+        eyeSpriteControl();
         eyeTimer();
     }
 
@@ -75,6 +83,22 @@ public class PlayerBlink : MonoBehaviour
             eyetime = 0f;
             fctime = 0f;
         }
+    }
+
+    private void eyeSpriteControl()
+    {
+        if (eyeOpend)
+            eyeSprite.sprite = eyeOpenSprite;
+        else
+            eyeSprite.sprite = eyeClosedSprite;
+        /*
+        if (holding)
+            eyeSprite.gameObject.transform.position = new Vector3(0.25f, 1f, 0f) + this.gameObject.transform.position;
+        else if (sliding)
+            eyeSprite.gameObject.transform.position = new Vector3(0.4f, 1.25f, 0f) + this.gameObject.transform.position;
+        else
+            eyeSprite.gameObject.transform.position = this.gameObject.transform.position;
+        */
     }
 
     public bool getEyeOpend()
