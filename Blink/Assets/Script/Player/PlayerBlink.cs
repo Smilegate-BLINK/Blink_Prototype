@@ -20,7 +20,10 @@ public class PlayerBlink : MonoBehaviour
 
     public bool holding;
     public bool sliding;
-    private bool changeSpPos;
+    public bool jumping;
+
+    private Vector3 eyePos;
+    private Vector3 eyeRevPos;
 
     private KeySetting keySetting;
 
@@ -33,8 +36,11 @@ public class PlayerBlink : MonoBehaviour
         fctime = forceClosedTimer;
         eyeSprite = transform.GetChild(2).GetComponent<SpriteRenderer>();
 
+        eyePos = eyeSprite.gameObject.transform.position - transform.position;
+        eyeRevPos = new Vector3(-eyePos.x, eyePos.y, eyePos.z);
         holding = false;
         sliding = false;
+        jumping = false;
 
         keySetting = FindObjectOfType<KeySetting>();
     }
@@ -88,14 +94,34 @@ public class PlayerBlink : MonoBehaviour
             eyeSprite.sprite = eyeOpenSprite;
         else
             eyeSprite.sprite = eyeClosedSprite;
-        /*
+
         if (holding)
-            eyeSprite.gameObject.transform.position = new Vector3(0.25f, 1f, 0f) + this.gameObject.transform.position;
-        else if (sliding)
-            eyeSprite.gameObject.transform.position = new Vector3(0.4f, 1.25f, 0f) + this.gameObject.transform.position;
+            eyeSprite.gameObject.transform.localScale = new Vector3(-1f, 1f, 0);
         else
-            eyeSprite.gameObject.transform.position = this.gameObject.transform.position;
-        */
+            eyeSprite.gameObject.transform.localScale = new Vector3(1f, 1f, 0);
+
+        if (transform.localScale.x > 0f)
+        {
+            if (holding)
+                eyeSprite.gameObject.transform.position = transform.position + eyePos + new Vector3(-0.25f, 0.1f, 0f);
+            else if (sliding)
+                eyeSprite.gameObject.transform.position = transform.position + eyePos + new Vector3(0f, 0.2f, 0f);
+            else if (jumping)
+                eyeSprite.gameObject.transform.position = transform.position + eyePos + new Vector3(-0.05f, 0f, 0f);
+            else
+                eyeSprite.gameObject.transform.position = transform.position + eyePos;
+        }
+        else
+        {
+            if (holding)
+                eyeSprite.gameObject.transform.position = transform.position + eyeRevPos + new Vector3(0.25f, 0.1f, 0f);
+            else if (sliding)
+                eyeSprite.gameObject.transform.position = transform.position + eyeRevPos + new Vector3(0f, 0.2f, 0f);
+            else if (jumping)
+                eyeSprite.gameObject.transform.position = transform.position + eyeRevPos + new Vector3(0.05f, 0f, 0f);
+            else
+                eyeSprite.gameObject.transform.position = transform.position + eyeRevPos;
+        }
     }
 
     public bool getEyeOpend()

@@ -32,6 +32,9 @@ public class GroundCheck : MonoBehaviour
                 case "Ground":
                     isGrounded = true;
                     break;
+                case "LadderGround":
+                    isGrounded = true;
+                    break;
                 case "Slope":
                     isSloped = true;
                     break;
@@ -52,6 +55,9 @@ public class GroundCheck : MonoBehaviour
         switch (collision.tag)
         {
             case "Ground":
+                isGrounded = false;
+                break;
+            case "LadderGround":
                 isGrounded = false;
                 break;
             case "Slope":

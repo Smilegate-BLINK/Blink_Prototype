@@ -19,7 +19,7 @@ public class PlayerController2 : MonoBehaviour
     public PhysicsMaterial2D slipperPM;
 
     [Header("이동속도")]
-    public float speed = 5f;
+    public float speed = 6f;
     [Header("점프력")]
     public float jumpForce = 12f;
     [Header("버튼 누름에 따른 점프력 차이")]
@@ -96,16 +96,15 @@ public class PlayerController2 : MonoBehaviour
     // 움직임 구현 함수
     private void Move()
     {
+        if (myRigid.velocity.x > speed)
+            myRigid.velocity = new Vector2(speed, myRigid.velocity.y);
+        else if (myRigid.velocity.x < -speed)
+            myRigid.velocity = new Vector2(-speed, myRigid.velocity.y);
+
         DoWallJump(horizontal);
         // 이 오브젝트가 움직일 수 있거나, 움직일 수 없지만 y축으로 움직이지 않으면 좌우 움직임 가능
         if (myGround.canMove || (!myGround.canMove && myRigid.velocity.y == 0f && !myWall.hitWall))
-        {
             myRigid.AddForce(new Vector2(horizontal * speed, 0f));
-            if (myRigid.velocity.x > speed)
-                myRigid.velocity = new Vector2(speed, myRigid.velocity.y);
-            else if (myRigid.velocity.x < -speed)
-                myRigid.velocity = new Vector2(-speed, myRigid.velocity.y);
-        }
 
         // 점프 및 점프키 누름 정도에 따라 점프력 결정
         if (myGround.canJump && Input.GetKeyDown(keySetting.UserKey[KeyAction.JUMP]))
@@ -129,6 +128,12 @@ public class PlayerController2 : MonoBehaviour
 
     private void PlayerAnimation()
     {
+        myBlink.holding = false;
+        myAnim.SetBool("isHolding", false);
+        myBlink.sliding = false;
+        myAnim.SetBool("isSliding", false);
+        myBlink.jumping = false;
+
         if (myRigid.velocity.x < -0.1f && transform.localScale.x > 0f)
             transform.localScale = transform.localScale - new Vector3(transform.localScale.x * 2, 0f, 0f);
         if (myRigid.velocity.x > 0.1f && transform.localScale.x < 0f)
@@ -139,21 +144,25 @@ public class PlayerController2 : MonoBehaviour
         if (myGround.canMove && horizontal != 0)
             myAnim.SetBool("isWalking", true);
 
-        if (myGround.isGrounded)
+        if (myGround.isGrounded || myGround.isSlippered)
             myAnim.SetBool("isJumping", false);
-        if (!myGround.isGrounded)
-            myAnim.SetBool("isJumping", true);
-        if (!myGround.isGrounded && !myWall.hitWall)
+        else
         {
-            myAnim.SetBool("isHolding", false);
-            myBlink.holding = false;
+            myAnim.SetBool("isJumping", true);
+            myBlink.jumping = true;
         }
+           
+
         if (!myGround.isGrounded && myWall.hitWall)
         {
             myAnim.SetBool("isHolding", true);
             myBlink.holding = true;
         }
-            
+        if (myGround.isSloped)
+        {
+            myAnim.SetBool("isSliding", true);
+            myBlink.sliding = true;
+        }
     }
 
     // 플레이어가 강제 이동(건물 내부 이동 등)을 당하는 상황일 때 호출되는 함수.
