@@ -403,6 +403,8 @@ MonoBehaviour:
   forceClosedTimer: 10
   eyeOpenSprite: {fileID: 21300000, guid: 3e50933331221364b9af650b6269e08a, type: 3}
   eyeClosedSprite: {fileID: 21300000, guid: 1a083ea7c7cc0954da344880e19faf6a, type: 3}
+  holding: 0
+  sliding: 0
 --- !u!114 &154382413
 MonoBehaviour:
   m_ObjectHideFlags: 0
