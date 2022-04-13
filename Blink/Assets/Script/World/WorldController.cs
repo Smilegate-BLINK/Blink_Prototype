@@ -16,13 +16,15 @@ public class WorldController : MonoBehaviour
     public List<SavePoint> savePoints = new List<SavePoint>();
     public int saveSpot;
 
-
     [Header("눈 감기 매커니즘 실행 여부")]
     public bool doBlinkFunc;
     [SerializeField, Header("맵의 발판들이 흐려지기 시작하는 시간")]
     private float startshadedTime = 1f;
     [SerializeField, Header("맵의 발판들이 완전히 흐려지는데 걸리는 시간")]
     private float shadedTimeTaken = 3f;
+    [Header("UI 페이드인/아웃 효과에 사용될 시간")]
+    public float fadingTime = 1f;
+
     private float time;
 
     // 일시정지 여부

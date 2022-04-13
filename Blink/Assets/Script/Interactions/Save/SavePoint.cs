@@ -25,8 +25,13 @@ public class SavePoint : MonoBehaviour, IInteraction
             {
                 myPlayer.tempSaveSpot = spotNumber;
                 myPlayer.MovetoSpot(insideBuilding.position);
-                WorldController.Instance.doBlinkFunc = false;
+                Invoke("AvoidBlinkFunc", WorldController.Instance.fadingTime);
             }
         }
+    }
+
+    private void AvoidBlinkFunc()
+    {
+        WorldController.Instance.doBlinkFunc = false;
     }
 }
