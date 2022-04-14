@@ -13,6 +13,7 @@ TagManager:
   - GroundCheck
   - SavePoint
   - SuperJump
+  - LadderGround
   layers:
   - Default
   - TransparentFX
