@@ -29,9 +29,6 @@ public class PlayerController2 : MonoBehaviour
     [HideInInspector]
     public int tempSaveSpot = 0;
 
-    // 플레이어가 강제로 이동되는 상황이면 true
-    private bool forceMoving;
-
     private KeySetting keySetting;
 
     // Start is called before the first frame update
@@ -44,8 +41,6 @@ public class PlayerController2 : MonoBehaviour
         myWall = transform.GetChild(1).GetComponent<WallCheck>();
         myBlink = GetComponent<PlayerBlink>();
         keySetting = FindObjectOfType<KeySetting>();
-
-        forceMoving = false;
 
         if (!GameManager.instance.isNewGame)
         {
@@ -62,7 +57,7 @@ public class PlayerController2 : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (!WorldController.Instance.getIsPause() && !forceMoving)
+        if (!WorldController.Instance.getIsPause() && WorldController.Instance.playerCanMove)
         {
             GetHorizontalDirection();
             ChangeFriction();
@@ -168,7 +163,8 @@ public class PlayerController2 : MonoBehaviour
     // 플레이어가 강제 이동(건물 내부 이동 등)을 당하는 상황일 때 호출되는 함수.
     public void MovetoSpot(Vector2 pos)
     {
-        forceMoving = true;
+        WorldController.Instance.playerCanMove = false;
+        myRigid.bodyType = RigidbodyType2D.Static;
         Fade.Instance.FadeOut();
         StartCoroutine(MoveSpot(pos));
         Invoke("FadeIn", WorldController.Instance.fadingTime * 2);
@@ -177,7 +173,10 @@ public class PlayerController2 : MonoBehaviour
     private void FadeIn()
     {
         Fade.Instance.FadeIn();
-        forceMoving = false;
+        myRigid.bodyType = RigidbodyType2D.Dynamic;
+        if (WorldController.Instance.playerRestart)
+            WorldController.Instance.playerRestart = false;
+        WorldController.Instance.playerCanMove = true;
     }
 
 

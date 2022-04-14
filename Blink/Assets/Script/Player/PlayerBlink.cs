@@ -48,13 +48,14 @@ public class PlayerBlink : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (!WorldController.Instance.getIsPause())
+        if (!WorldController.Instance.getIsPause() && WorldController.Instance.playerCanMove)
         {
             if (Input.GetKeyDown(keySetting.UserKey[KeyAction.BLINK]))
                 eyeOpend = !eyeOpend;
+            eyeTimer();
         }
         eyeSpriteControl();
-        eyeTimer();
+        
     }
 
     private void eyeTimer()

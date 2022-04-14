@@ -11,6 +11,8 @@ public class WorldController : MonoBehaviour
     // 플레이어 인스턴스
     private GameObject myPlayer;
     private PlayerBlink plBlink;
+    public bool playerRestart;
+    public bool playerCanMove;
 
     // 세이브 포인트 인스턴스
     public List<SavePoint> savePoints = new List<SavePoint>();
@@ -49,6 +51,8 @@ public class WorldController : MonoBehaviour
         UIManager.instance.SetActiveSettingUI(false);
         myPlayer = GameObject.Find("Player");
         plBlink = myPlayer.GetComponent<PlayerBlink>();
+        playerRestart = false;
+        playerCanMove = true;
 
         doBlinkFunc = true;
         worldBlackOut = !plBlink.getEyeOpend();
