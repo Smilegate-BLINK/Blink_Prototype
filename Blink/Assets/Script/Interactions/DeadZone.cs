@@ -2,15 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DeadZone : MonoBehaviour, IInteraction
+public class DeadZone : MonoBehaviour
 {
     // Start is called before the first frame update
-    public void Interact(GameObject target)
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (target.tag == "Player")
+        if (collision.tag == "Player")
         {
-            PlayerController2 myPlayer = target.GetComponent<PlayerController2>();
-            //GameManager.instance.SetSavepoint(gameObject);
+            PlayerController2 myPlayer = collision.GetComponent<PlayerController2>();
+            WorldController.Instance.playerRestart = true;
             myPlayer.MovetoSpot(WorldController.Instance.savePoints[WorldController.Instance.saveSpot].transform.position);
         }
     }
