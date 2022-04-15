@@ -55,7 +55,7 @@ public class WorldController : MonoBehaviour
         playerCanMove = true;
 
         doBlinkFunc = true;
-        worldBlackOut = !plBlink.getEyeOpend();
+        worldBlackOut = !plBlink.eyeOpend;
         worldAlpha = 1f;
 
         isPause = false;
@@ -71,7 +71,7 @@ public class WorldController : MonoBehaviour
             ExitSetting();
 
         // ´« ±ôºýÀÓ °ü·Ã
-        worldBlackOut = !plBlink.getEyeOpend();
+        worldBlackOut = !plBlink.eyeOpend;
         if (doBlinkFunc)
             changeWorldAlpha();
         else

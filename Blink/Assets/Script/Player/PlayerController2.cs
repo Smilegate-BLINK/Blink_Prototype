@@ -42,6 +42,8 @@ public class PlayerController2 : MonoBehaviour
         myBlink = GetComponent<PlayerBlink>();
         keySetting = FindObjectOfType<KeySetting>();
 
+        // 22/04/15 현재 제대로 작동이 되지 않고 있습니다.
+        // 게임매니저 인스턴스 자체가 없어서 그런 것 같네요.
         if (!GameManager.instance.isNewGame)
         {
             string fName = string.Format(Application.streamingAssetsPath + "/DataFiles", "PlayerInfo");
@@ -50,8 +52,10 @@ public class PlayerController2 : MonoBehaviour
                 PlayerInfo info = GameManager.instance.fileIOHelper.LoadJsonFile<PlayerInfo>(Application.streamingAssetsPath + "/DataFiles", "PlayerInfo");
                 WorldController.Instance.saveSpot = info.saveSpot;
                 MovetoSpot(WorldController.Instance.savePoints[info.saveSpot].transform.position);
-            }
+            }    
         }
+        else
+            MovetoSpot(WorldController.Instance.savePoints[0].transform.position);
     }
 
     // Update is called once per frame
@@ -184,7 +188,6 @@ public class PlayerController2 : MonoBehaviour
     {
         yield return new WaitForSeconds(WorldController.Instance.fadingTime);
         transform.position = pos;
-        myRigid.velocity = Vector2.zero;
         CameraController.Instance.SetCameraPos();
     }
 
