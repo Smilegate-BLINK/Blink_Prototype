@@ -22,8 +22,9 @@ public class SavePoint : MonoBehaviour, IInteraction
     {
         if (target.tag == "Player" && !isStartPoint)
         {
+            if (!insideBuilding)
+                Debug.LogError("There is No Door to Enter!!!");
             PlayerController2 myPlayer = target.GetComponent<PlayerController2>();
-            //GameManager.instance.SetSavepoint(gameObject);
             if (myPlayer != null)
             {
                 myPlayer.tempSaveSpot = spotNumber;
