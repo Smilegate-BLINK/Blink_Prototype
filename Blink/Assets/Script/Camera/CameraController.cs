@@ -17,7 +17,9 @@ public class CameraController : MonoBehaviour
     private Transform myPlayer;
     private Camera myCamera;
 
+    [Header("시작 시 카메라를 플레이어 기준에서 위치시킬 X좌표")]
     public float initialPosX;
+    [Header("시작 시 카메라를 플레이어 기준에서 위치시킬 Y좌표")]
     public float initialPosY;
 
     private void Awake()

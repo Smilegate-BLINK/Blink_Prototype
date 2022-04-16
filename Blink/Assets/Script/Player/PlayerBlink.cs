@@ -9,18 +9,27 @@ public class PlayerBlink : MonoBehaviour
     [Header("강제로 감겼을 때 다시 뜰 수 있을때까지 걸리는 시간")]
     public float forceClosedTimer = 10f;
 
-    private bool eyeOpend;
+    [HideInInspector]
+    public bool eyeOpend;
     private bool forcedClose;
     private float eyetime;  // 눈을 열고닫는 타이머
     private float fctime;  // 강제로 눈을 감게 하는 시간 타이머
 
     private SpriteRenderer eyeSprite;
+    [HideInInspector]
     public Sprite eyeOpenSprite;
+    [HideInInspector]
     public Sprite eyeClosedSprite;
 
+    [HideInInspector]
     public bool holding;
+    [HideInInspector]
     public bool sliding;
-    private bool changeSpPos;
+    [HideInInspector]
+    public bool jumping;
+
+    private Vector3 eyePos;
+    private Vector3 eyeRevPos;
 
     private KeySetting keySetting;
 
@@ -33,8 +42,11 @@ public class PlayerBlink : MonoBehaviour
         fctime = forceClosedTimer;
         eyeSprite = transform.GetChild(2).GetComponent<SpriteRenderer>();
 
+        eyePos = eyeSprite.gameObject.transform.position - transform.position;
+        eyeRevPos = new Vector3(-eyePos.x, eyePos.y, eyePos.z);
         holding = false;
         sliding = false;
+        jumping = false;
 
         keySetting = FindObjectOfType<KeySetting>();
     }
@@ -42,13 +54,14 @@ public class PlayerBlink : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (!WorldController.Instance.getIsPause())
+        if (!WorldController.Instance.getIsPause() && WorldController.Instance.playerCanMove)
         {
             if (Input.GetKeyDown(keySetting.UserKey[KeyAction.BLINK]))
                 eyeOpend = !eyeOpend;
+            eyeTimer();
         }
         eyeSpriteControl();
-        eyeTimer();
+        
     }
 
     private void eyeTimer()
@@ -88,18 +101,33 @@ public class PlayerBlink : MonoBehaviour
             eyeSprite.sprite = eyeOpenSprite;
         else
             eyeSprite.sprite = eyeClosedSprite;
-        /*
-        if (holding)
-            eyeSprite.gameObject.transform.position = new Vector3(0.25f, 1f, 0f) + this.gameObject.transform.position;
-        else if (sliding)
-            eyeSprite.gameObject.transform.position = new Vector3(0.4f, 1.25f, 0f) + this.gameObject.transform.position;
-        else
-            eyeSprite.gameObject.transform.position = this.gameObject.transform.position;
-        */
-    }
 
-    public bool getEyeOpend()
-    {
-        return eyeOpend;
+        if (holding)
+            eyeSprite.gameObject.transform.localScale = new Vector3(-1f, 1f, 0);
+        else
+            eyeSprite.gameObject.transform.localScale = new Vector3(1f, 1f, 0);
+
+        if (transform.localScale.x > 0f)
+        {
+            if (holding)
+                eyeSprite.gameObject.transform.position = transform.position + eyePos + new Vector3(-0.25f, 0.1f, 0f);
+            else if (sliding)
+                eyeSprite.gameObject.transform.position = transform.position + eyePos + new Vector3(0f, 0.2f, 0f);
+            else if (jumping)
+                eyeSprite.gameObject.transform.position = transform.position + eyePos + new Vector3(-0.05f, 0f, 0f);
+            else
+                eyeSprite.gameObject.transform.position = transform.position + eyePos;
+        }
+        else
+        {
+            if (holding)
+                eyeSprite.gameObject.transform.position = transform.position + eyeRevPos + new Vector3(0.25f, 0.1f, 0f);
+            else if (sliding)
+                eyeSprite.gameObject.transform.position = transform.position + eyeRevPos + new Vector3(0f, 0.2f, 0f);
+            else if (jumping)
+                eyeSprite.gameObject.transform.position = transform.position + eyeRevPos + new Vector3(0.05f, 0f, 0f);
+            else
+                eyeSprite.gameObject.transform.position = transform.position + eyeRevPos;
+        }
     }
 }

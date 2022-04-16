@@ -5,7 +5,7 @@ using UnityEngine;
 public class LadderGroundController : MonoBehaviour
 {
     private BoxCollider2D myCol;
-    public GameObject myPlayer;
+    private GameObject myPlayer;
     private BoxCollider2D playerCol;
     private float overPosY;
     private float underPosY;
@@ -14,6 +14,7 @@ public class LadderGroundController : MonoBehaviour
     void Start()
     {
         myCol = GetComponent<BoxCollider2D>();
+        myPlayer = GameObject.Find("Player");
         playerCol = myPlayer.GetComponent<BoxCollider2D>();
         myCol.enabled = false;
         float temp = (myCol.size.y / 2 + myCol.offset.y) * transform.localScale.y + (playerCol.size.y / 2 + playerCol.offset.y) * playerCol.transform.localScale.y;

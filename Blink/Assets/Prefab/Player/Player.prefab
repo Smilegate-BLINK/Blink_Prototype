@@ -335,7 +335,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.1, y: 0}
+  m_Offset: {x: 0.105, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -383,7 +383,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundPM: {fileID: 6200000, guid: bf6fb214e54d5334ea3b078c133662e7, type: 2}
   slipperPM: {fileID: 6200000, guid: 511e786ca0f71c54a98e224033021174, type: 2}
-  speed: 5
+  speed: 6
   jumpForce: 12
   jumpDiff: 0.6
   tempSaveSpot: 0
@@ -401,10 +401,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eyeOpenTime: 5
   forceClosedTimer: 10
+  eyeOpend: 0
   eyeOpenSprite: {fileID: 21300000, guid: 3e50933331221364b9af650b6269e08a, type: 3}
   eyeClosedSprite: {fileID: 21300000, guid: 1a083ea7c7cc0954da344880e19faf6a, type: 3}
   holding: 0
   sliding: 0
+  jumping: 0
 --- !u!114 &154382413
 MonoBehaviour:
   m_ObjectHideFlags: 0
