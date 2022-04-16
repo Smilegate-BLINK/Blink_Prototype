@@ -67,6 +67,7 @@ public class PlayerController2 : MonoBehaviour
             ChangeFriction();
             Move();
             PlayerAnimation();
+            //Debug.Log(myRigid.velocity.x);
         }
     }
 
@@ -196,5 +197,15 @@ public class PlayerController2 : MonoBehaviour
         PlayerInfo info = new PlayerInfo(this);
         var jsonData = JsonUtility.ToJson(info);
         GameManager.instance.fileIOHelper.CreateJsonFile(Application.streamingAssetsPath + "/DataFiles", "PlayerInfo", jsonData);
+    }
+
+    public int getHorizontal()
+    {
+        return horizontal;
+    }
+    
+    public float getSpeed()
+    {
+        return speed;
     }
 }
