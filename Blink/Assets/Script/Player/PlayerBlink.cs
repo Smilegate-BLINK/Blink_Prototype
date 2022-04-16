@@ -9,17 +9,23 @@ public class PlayerBlink : MonoBehaviour
     [Header("강제로 감겼을 때 다시 뜰 수 있을때까지 걸리는 시간")]
     public float forceClosedTimer = 10f;
 
+    [HideInInspector]
     public bool eyeOpend;
     private bool forcedClose;
     private float eyetime;  // 눈을 열고닫는 타이머
     private float fctime;  // 강제로 눈을 감게 하는 시간 타이머
 
     private SpriteRenderer eyeSprite;
+    [HideInInspector]
     public Sprite eyeOpenSprite;
+    [HideInInspector]
     public Sprite eyeClosedSprite;
 
+    [HideInInspector]
     public bool holding;
+    [HideInInspector]
     public bool sliding;
+    [HideInInspector]
     public bool jumping;
 
     private Vector3 eyePos;

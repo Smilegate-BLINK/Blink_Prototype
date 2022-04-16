@@ -11,14 +11,17 @@ public class WorldController : MonoBehaviour
     // 플레이어 인스턴스
     private GameObject myPlayer;
     private PlayerBlink plBlink;
+    [HideInInspector]
     public bool playerRestart;
+    [HideInInspector]
     public bool playerCanMove;
 
     // 세이브 포인트 인스턴스
     public List<SavePoint> savePoints = new List<SavePoint>();
+    [HideInInspector]
     public int saveSpot;
 
-    [Header("눈 감기 매커니즘 실행 여부")]
+    [Header("눈 감기 매커니즘 실행 여부"), HideInInspector]
     public bool doBlinkFunc;
     [SerializeField, Header("맵의 발판들이 흐려지기 시작하는 시간")]
     private float startshadedTime = 1f;
