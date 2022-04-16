@@ -91,7 +91,7 @@ public class PlayerBlink : MonoBehaviour
         if (!WorldController.Instance.doBlinkFunc)
         {
             eyetime = 0f;
-            fctime = 0f;
+            fctime = 10f;
         }
     }
 

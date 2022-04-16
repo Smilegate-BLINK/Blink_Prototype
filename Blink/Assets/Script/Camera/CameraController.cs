@@ -12,7 +12,7 @@ public class CameraController : MonoBehaviour
     private Vector2 playerPos;
     private float xScreenHalfSize;
     private float yScreenHalfSize;
-    private float camearDepth;
+    private float camearDepth = -10f;
 
     private Transform myPlayer;
     private Camera myCamera;
