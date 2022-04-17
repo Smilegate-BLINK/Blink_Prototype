@@ -9,7 +9,7 @@ public class CreditController : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-            SceneManager.LoadScene("MainScene");
+            gameObject.SetActive(false);
         }
     }
 }
