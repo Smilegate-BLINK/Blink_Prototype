@@ -51,11 +51,13 @@ public class PlayerController2 : MonoBehaviour
             {
                 PlayerInfo info = GameManager.instance.fileIOHelper.LoadJsonFile<PlayerInfo>(Application.streamingAssetsPath + "/DataFiles", "PlayerInfo");
                 WorldController.Instance.saveSpot = info.saveSpot;
-                MovetoSpot(WorldController.Instance.savePoints[info.saveSpot].transform.position);
+                transform.position = WorldController.Instance.savePoints[info.saveSpot].transform.position;
             }    
         }
         else
-            MovetoSpot(WorldController.Instance.savePoints[0].transform.position);
+            transform.position = WorldController.Instance.savePoints[0].transform.position;
+        CameraController.Instance.SetCameraPos();
+        FadeIn();
     }
 
     // Update is called once per frame
