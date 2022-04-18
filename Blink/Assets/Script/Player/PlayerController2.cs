@@ -155,7 +155,7 @@ public class PlayerController2 : MonoBehaviour
         }
            
 
-        if (!myGround.isGrounded && myWall.hitWall)
+        if (!(myGround.isGrounded || myGround.isSlippered) && myWall.hitWall)
         {
             myAnim.SetBool("isHolding", true);
             myBlink.holding = true;
@@ -174,6 +174,11 @@ public class PlayerController2 : MonoBehaviour
         myRigid.bodyType = RigidbodyType2D.Static;
         Fade.Instance.FadeOut();
         StartCoroutine(MoveSpot(pos));
+        publicFadeIn();
+    }
+
+    public void publicFadeIn()
+    {
         Invoke("FadeIn", WorldController.Instance.fadingTime * 2);
     }
 
