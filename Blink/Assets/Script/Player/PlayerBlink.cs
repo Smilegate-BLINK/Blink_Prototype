@@ -90,6 +90,7 @@ public class PlayerBlink : MonoBehaviour
 
         if (!WorldController.Instance.doBlinkFunc)
         {
+            forcedClose = false;
             eyetime = 0f;
             fctime = 10f;
         }
