@@ -17,14 +17,15 @@ public class Fade : MonoBehaviour
             Destroy(this.gameObject);
         else
             _instance = this;
+        myImage = GetComponent<Image>();
     }
 
     // Start is called before the first frame update
     private void Start()
     {
         fadeTime = WorldController.Instance.fadingTime;
-        myImage = GetComponent<Image>();
     }
+
     public void FadeIn()
     {
         StartCoroutine(FadeImage(1, 0));

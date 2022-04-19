@@ -12,7 +12,7 @@ public class CameraController : MonoBehaviour
     private Vector2 playerPos;
     private float xScreenHalfSize;
     private float yScreenHalfSize;
-    private float camearDepth;
+    private float camearDepth = -10f;
 
     private Transform myPlayer;
     private Camera myCamera;
@@ -46,7 +46,7 @@ public class CameraController : MonoBehaviour
     private void LateUpdate()
     {
         moveCamera();
-        changeBackGround();
+        //changeBackGround();
     }
 
     // 플레이어가 순간이동할 때 시행되는 카메라 움직임

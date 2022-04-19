@@ -51,11 +51,13 @@ public class PlayerController2 : MonoBehaviour
             {
                 PlayerInfo info = GameManager.instance.fileIOHelper.LoadJsonFile<PlayerInfo>(Application.streamingAssetsPath + "/DataFiles", "PlayerInfo");
                 WorldController.Instance.saveSpot = info.saveSpot;
-                MovetoSpot(WorldController.Instance.savePoints[info.saveSpot].transform.position);
+                transform.position = WorldController.Instance.savePoints[info.saveSpot].transform.position;
             }    
         }
         else
-            MovetoSpot(WorldController.Instance.savePoints[0].transform.position);
+            transform.position = WorldController.Instance.savePoints[0].transform.position;
+        CameraController.Instance.SetCameraPos();
+        FadeIn();
     }
 
     // Update is called once per frame
@@ -153,7 +155,7 @@ public class PlayerController2 : MonoBehaviour
         }
            
 
-        if (!myGround.isGrounded && myWall.hitWall)
+        if (!(myGround.isGrounded || myGround.isSlippered) && myWall.hitWall)
         {
             myAnim.SetBool("isHolding", true);
             myBlink.holding = true;
@@ -172,6 +174,11 @@ public class PlayerController2 : MonoBehaviour
         myRigid.bodyType = RigidbodyType2D.Static;
         Fade.Instance.FadeOut();
         StartCoroutine(MoveSpot(pos));
+        publicFadeIn();
+    }
+
+    public void publicFadeIn()
+    {
         Invoke("FadeIn", WorldController.Instance.fadingTime * 2);
     }
 
