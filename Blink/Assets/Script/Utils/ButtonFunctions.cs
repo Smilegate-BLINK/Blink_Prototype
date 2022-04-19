@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class ButtonFunctions : MonoBehaviour
 {
+    public GameObject CreditUI;
     public void LoadNewGame()
     {
         SceneManager.LoadSceneAsync("PlayerWorld");
@@ -23,7 +24,7 @@ public class ButtonFunctions : MonoBehaviour
 
     public void LoadCredit()
     {
-        SceneManager.LoadScene("Credit");
+        CreditUI.SetActive(true);
     }
     
     public void QuitGame()

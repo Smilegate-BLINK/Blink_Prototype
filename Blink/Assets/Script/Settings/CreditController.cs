@@ -9,7 +9,32 @@ public class CreditController : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-            SceneManager.LoadScene("MainScene");
+            gameObject.SetActive(false);
         }
+    }
+
+    private void OnEnable()
+    {
+        StartCoroutine(ScrollCredit());
+    }
+
+    private IEnumerator ScrollCredit()
+    {
+        while(transform.localPosition.y < 500)
+        {
+            transform.Translate(0, 50 * Time.deltaTime, 0);
+            yield return null;
+        }
+        gameObject.SetActive(false);
+    }
+
+    private void OnDisable()
+    {
+        ResetCredit();
+    }
+
+    private void ResetCredit()
+    {
+        transform.localPosition = new Vector3(0, -500f, 0);
     }
 }
