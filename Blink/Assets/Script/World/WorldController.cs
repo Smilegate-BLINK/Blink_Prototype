@@ -39,7 +39,6 @@ public class WorldController : MonoBehaviour
     // 1이 불투명, 0이 투명
     private float worldAlpha;
 
-
     private void Awake()
     {
         if (_instance != null && _instance != this)

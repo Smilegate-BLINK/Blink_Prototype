@@ -15,6 +15,23 @@ public class PlayerBlink : MonoBehaviour
     private float eyetime;  // 눈을 열고닫는 타이머
     private float fctime;  // 강제로 눈을 감게 하는 시간 타이머
 
+    //2020-04-20 이주호 작성
+    public float Eyetime
+    {
+        get => eyetime;
+        private set => eyetime = value;
+    }
+    public bool ForcedClose
+    {
+        get => forcedClose;
+        private set => forcedClose = value;
+    }
+    public float FcTime
+    {
+        get => fctime;
+        private set => fctime = value;
+    }
+
     private SpriteRenderer eyeSprite;
     [HideInInspector]
     public Sprite eyeOpenSprite;
