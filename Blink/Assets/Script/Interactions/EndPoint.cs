@@ -7,6 +7,13 @@ public class EndPoint : MonoBehaviour, IInteraction
 {
     public void Interact(GameObject target)
     {
+        StartCoroutine(MoveToEndScene());
+    }
+
+    IEnumerator MoveToEndScene()
+    {
+        Fade.Instance.FadeOut();
+        yield return new WaitForSeconds(1.5f);
         SceneManager.LoadScene("EndingScene");
     }
 }
