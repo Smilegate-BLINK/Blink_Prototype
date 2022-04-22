@@ -31,8 +31,7 @@ public class PlayerController2 : MonoBehaviour
 
     private KeySetting keySetting;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         myAnim = GetComponent<Animator>();
         myCol = GetComponent<BoxCollider2D>();
@@ -41,9 +40,11 @@ public class PlayerController2 : MonoBehaviour
         myWall = transform.GetChild(1).GetComponent<WallCheck>();
         myBlink = GetComponent<PlayerBlink>();
         keySetting = FindObjectOfType<KeySetting>();
+    }
 
-        // 22/04/15 현재 제대로 작동이 되지 않고 있습니다.
-        // 게임매니저 인스턴스 자체가 없어서 그런 것 같네요.
+    // Start is called before the first frame update
+    void Start()
+    {
         if (!GameManager.instance.isNewGame)
         {
             string fName = string.Format(Application.streamingAssetsPath + "/DataFiles", "PlayerInfo");
@@ -57,7 +58,6 @@ public class PlayerController2 : MonoBehaviour
         else
             transform.position = WorldController.Instance.savePoints[0].transform.position;
         CameraController.Instance.SetCameraPos();
-        FadeIn();
     }
 
     // Update is called once per frame
@@ -69,7 +69,6 @@ public class PlayerController2 : MonoBehaviour
             ChangeFriction();
             Move();
             PlayerAnimation();
-            //Debug.Log(myRigid.velocity.x);
         }
     }
 
@@ -110,8 +109,10 @@ public class PlayerController2 : MonoBehaviour
 
         // 점프 및 점프키 누름 정도에 따라 점프력 결정
         if (myGround.canJump && Input.GetKeyDown(keySetting.UserKey[KeyAction.JUMP]))
+        {
             myRigid.AddForce(new Vector2(myRigid.velocity.x, jumpForce), ForceMode2D.Impulse);
-
+            myBlink.jump.Play();
+        }
         if (Input.GetKeyUp(keySetting.UserKey[KeyAction.JUMP]) && myRigid.velocity.y > 0f)
             myRigid.velocity = (new Vector2(myRigid.velocity.x, myRigid.velocity.y * jumpDiff));
     }
@@ -122,9 +123,15 @@ public class PlayerController2 : MonoBehaviour
         if (myWall.hitWall && !myGround.canMove)
         {
             if (myWall.hitRightWall && horizontal < 0 && Input.GetKeyDown(keySetting.UserKey[KeyAction.JUMP]))
+            {
                 myRigid.AddForce(new Vector2(-speed, jumpForce), ForceMode2D.Impulse);
+                myBlink.jump.Play();
+            }
             else if (myWall.hitLeftWall && horizontal > 0 && Input.GetKeyDown(keySetting.UserKey[KeyAction.JUMP]))
+            {
                 myRigid.AddForce(new Vector2(speed, jumpForce), ForceMode2D.Impulse);
+                myBlink.jump.Play();
+            }
         }
     }
 
@@ -142,9 +149,16 @@ public class PlayerController2 : MonoBehaviour
             transform.localScale = transform.localScale - new Vector3(transform.localScale.x * 2, 0f, 0f);
 
         if (myGround.canMove && horizontal == 0)
+        {
             myAnim.SetBool("isWalking", false);
+            myBlink.walking = false;
+        }
+            
         if (myGround.canMove && horizontal != 0)
+        {
             myAnim.SetBool("isWalking", true);
+            myBlink.walking = true;
+        }
 
         if (myGround.isGrounded || myGround.isSlippered)
             myAnim.SetBool("isJumping", false);

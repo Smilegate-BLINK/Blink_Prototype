@@ -88,14 +88,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a77fd9d02c94a7d45a1ac4df42070a07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  innerBuilding: {fileID: 21300000, guid: 8a0e8b7463293a44abaa89f358510a96, type: 3}
   darkSprite: {fileID: 21300000, guid: f3b3067c572f71c40bc893523a05d466, type: 3}
-  brightSprite: {fileID: 21300000, guid: 5e9c55be984722640a38171bdde46a9b, type: 3}
-  low1: {fileID: 21300000, guid: 973a36fdbe557d74fb0915d937f2c78c, type: 3}
-  low2: {fileID: 21300000, guid: ec460085c35a69f48a326f8d6fb973f9, type: 3}
-  middle1: {fileID: 21300000, guid: 1f34640a5b217644697e55e1131c37eb, type: 3}
-  middle2: {fileID: 21300000, guid: e2ba5f3082ba97d429b405a47d95f085, type: 3}
-  high1: {fileID: 21300000, guid: 34ac6ce33e8e6d740a359ed1c331bad3, type: 3}
-  high2: {fileID: 21300000, guid: abaaf5a62b13d154ba95453aa0e64245, type: 3}
+  brightSprite: {fileID: 21300000, guid: 587067082f45314458daa6156156a41e, type: 3}
+  low1: {fileID: 21300000, guid: 9a8461acc885c3c41850ffc35300b6c8, type: 3}
+  low2: {fileID: 21300000, guid: fa999afc21685274a8741662f73091fc, type: 3}
+  middle1: {fileID: 21300000, guid: 8f875a371ec80e648a8ca41862f41fba, type: 3}
+  middle2: {fileID: 21300000, guid: f575c76111cf96c47969bd86b395369f, type: 3}
+  high1: {fileID: 21300000, guid: 64842778133cbd34ea5b781875f55881, type: 3}
+  high2: {fileID: 21300000, guid: e7febbfbd319ae2468bef1ca489aad7c, type: 3}
+  in_Low1: {fileID: 21300000, guid: e9be65b0070482642a776d492522b5ae, type: 3}
+  in_Low2: {fileID: 21300000, guid: 79c0bb62ece929f4cb1d47bae9d74744, type: 3}
+  in_Middle1: {fileID: 21300000, guid: daf75854ff6b8394bbc8e7b349ddd041, type: 3}
+  in_Middle2: {fileID: 21300000, guid: 165e568aa176cfb488969a6842c38c99, type: 3}
+  in_High1: {fileID: 21300000, guid: e8b49b7f123f99d4991abe82c6e8a54d, type: 3}
+  in_High2: {fileID: 21300000, guid: f7d9165589024ae408dc20d1e37fd613, type: 3}
 --- !u!1 &8563411800780887111
 GameObject:
   m_ObjectHideFlags: 0

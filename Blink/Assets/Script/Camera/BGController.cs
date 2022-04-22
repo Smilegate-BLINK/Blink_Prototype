@@ -5,11 +5,13 @@ using UnityEngine.UI;
 
 public class BGController : MonoBehaviour
 {
+    private PlayerController2 myPlayer;
     private Image myImage;
     private List<float> savePointPos = new List<float>();
 
     private float camPosY;
 
+    public Sprite innerBuilding;
     public Sprite darkSprite;
     public Sprite brightSprite;
     public Sprite low1;
@@ -18,10 +20,17 @@ public class BGController : MonoBehaviour
     public Sprite middle2;
     public Sprite high1;
     public Sprite high2;
+    public Sprite in_Low1;
+    public Sprite in_Low2;
+    public Sprite in_Middle1;
+    public Sprite in_Middle2;
+    public Sprite in_High1;
+    public Sprite in_High2;
 
     private void Awake()
     {
         myImage = GetComponent<Image>();
+        myPlayer = GameObject.Find("Player").GetComponent<PlayerController2>();
     }
 
     private void Start()
@@ -44,8 +53,6 @@ public class BGController : MonoBehaviour
 
         savePointPos.Sort();
         savePointPos.Reverse();
-        foreach (float t in savePointPos)
-            Debug.Log(t);
     }
 
     // Update is called once per frame
@@ -53,26 +60,38 @@ public class BGController : MonoBehaviour
     {
         camPosY = CameraController.Instance.gameObject.transform.position.y;
 
-        if (WorldController.Instance.getWorldBlackOut())
-            myImage.sprite = darkSprite;
+        if (!WorldController.Instance.doBlinkFunc)
+        {
+            if (myPlayer.tempSaveSpot == 0 || myPlayer.tempSaveSpot == 1)
+                myImage.sprite = in_Low1;
+            else if (myPlayer.tempSaveSpot == 2)
+                myImage.sprite = in_Middle1;
+            else if (myPlayer.tempSaveSpot == 3)
+                myImage.sprite = in_Middle2;
+            else
+                myImage.sprite = in_High1;
+        }
         else
         {
-            if (camPosY > savePointPos[0])
-                myImage.sprite = brightSprite;
-            else if (camPosY > savePointPos[1])
-                myImage.sprite = high2;
-            else if (camPosY > savePointPos[2])
-                myImage.sprite = high1;
-            else if (camPosY > savePointPos[4])
-                myImage.sprite = middle2;
-            else if (camPosY > savePointPos[6])
-                myImage.sprite = middle1;
-            else if (camPosY > savePointPos[7])
-                myImage.sprite = low2;
+            if (WorldController.Instance.getWorldBlackOut())
+                myImage.sprite = darkSprite;
             else
-                myImage.sprite = low1;
-        }
-        
-            
+            {
+                if (camPosY > savePointPos[0])
+                    myImage.sprite = brightSprite;
+                else if (camPosY > savePointPos[1])
+                    myImage.sprite = high2;
+                else if (camPosY > savePointPos[2])
+                    myImage.sprite = high1;
+                else if (camPosY > savePointPos[4])
+                    myImage.sprite = middle2;
+                else if (camPosY > savePointPos[6])
+                    myImage.sprite = middle1;
+                else if (camPosY > savePointPos[7])
+                    myImage.sprite = low2;
+                else
+                    myImage.sprite = low1;
+            }
+        }    
     }
 }
