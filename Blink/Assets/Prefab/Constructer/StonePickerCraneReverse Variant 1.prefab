@@ -899,7 +899,7 @@ GameObject:
   - component: {fileID: 7334939783199808915}
   m_Layer: 10
   m_Name: Lifter
-  m_TagString: Slope
+  m_TagString: Slipper
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1130,7 +1130,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7334939783431210264}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 20, y: 18, z: 0}
   m_LocalScale: {x: -1.5, y: 1.5, z: 1.5}
   m_Children:
@@ -1152,7 +1152,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bed60376563841e40951829dd2d2c22a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myWorld: {fileID: 0}
   eyeOpenMat: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   eyeCloseMat: {fileID: 2100000, guid: a519c43dc27ecb0429b9499dfd2cab89, type: 2}
   isChanged: 0
@@ -1171,7 +1170,7 @@ GameObject:
   - component: {fileID: 7334939783448077323}
   m_Layer: 10
   m_Name: LifterBase
-  m_TagString: Slope
+  m_TagString: Slipper
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

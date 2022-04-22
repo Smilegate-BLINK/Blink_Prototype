@@ -9,6 +9,11 @@ public class PlayerBlink : MonoBehaviour
     [Header("강제로 감겼을 때 다시 뜰 수 있을때까지 걸리는 시간")]
     public float forceClosedTimer = 10f;
 
+    public AudioSource walk;
+    public AudioSource jump;
+    public AudioSource slide;
+    
+
     [HideInInspector]
     public bool eyeOpend;
     private bool forcedClose;
@@ -44,11 +49,18 @@ public class PlayerBlink : MonoBehaviour
     public bool sliding;
     [HideInInspector]
     public bool jumping;
+    [HideInInspector]
+    public bool walking;
 
     private Vector3 eyePos;
     private Vector3 eyeRevPos;
 
     private KeySetting keySetting;
+
+    private void Awake()
+    {
+        eyeSprite = transform.GetChild(2).GetComponent<SpriteRenderer>();
+    }
 
     // Start is called before the first frame update
     private void Start()
@@ -57,8 +69,7 @@ public class PlayerBlink : MonoBehaviour
         forcedClose = false;
         eyetime = 0f;
         fctime = forceClosedTimer;
-        eyeSprite = transform.GetChild(2).GetComponent<SpriteRenderer>();
-
+        
         eyePos = eyeSprite.gameObject.transform.position - transform.position;
         eyeRevPos = new Vector3(-eyePos.x, eyePos.y, eyePos.z);
         holding = false;
@@ -78,7 +89,27 @@ public class PlayerBlink : MonoBehaviour
             eyeTimer();
         }
         eyeSpriteControl();
-        
+
+        playerSoundControl();
+    }
+
+    private void playerSoundControl()
+    {
+        if (holding || sliding)
+        {
+            if (!slide.isPlaying)
+                slide.Play();
+        }
+        else
+            slide.Stop();
+
+        if (walking && !(jumping || holding || sliding))
+        {
+            if (!walk.isPlaying)
+                walk.Play();
+        }
+        else
+            walk.Stop();
     }
 
     private void eyeTimer()

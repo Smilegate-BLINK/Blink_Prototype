@@ -12,7 +12,7 @@ public class DeadZone : MonoBehaviour
         {
             PlayerController2 myPlayer = collision.GetComponent<PlayerController2>();
             WorldController.Instance.playerRestart = true;
-            myPlayer.MovetoSpot(WorldController.Instance.savePoints[WorldController.Instance.saveSpot].transform.position);
+            myPlayer.MovetoSpot(WorldController.Instance.savePoints[0].transform.position);
         }
     }
 }
