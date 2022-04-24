@@ -18258,18 +18258,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 7260623418375485262, guid: 4c48227c624d25b4480ca8d3fdd1a1d7, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7260623418375485262, guid: 4c48227c624d25b4480ca8d3fdd1a1d7, type: 3}
-      propertyPath: eyeOpenTime
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7260623418375485263, guid: 4c48227c624d25b4480ca8d3fdd1a1d7, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7260623418375485264, guid: 4c48227c624d25b4480ca8d3fdd1a1d7, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -18318,10 +18306,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 7260623418375485267, guid: 4c48227c624d25b4480ca8d3fdd1a1d7, type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 6200000, guid: bf6fb214e54d5334ea3b078c133662e7, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c48227c624d25b4480ca8d3fdd1a1d7, type: 3}
 --- !u!4 &1903078831 stripped
