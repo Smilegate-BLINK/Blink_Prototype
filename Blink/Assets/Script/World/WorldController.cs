@@ -20,6 +20,8 @@ public class WorldController : MonoBehaviour
     public List<SavePoint> savePoints = new List<SavePoint>();
     [HideInInspector]
     public int saveSpot;
+    [HideInInspector]
+    public int hightestSpot = 0;
 
     [Header("눈 감기 매커니즘 실행 여부"), HideInInspector]
     public bool doBlinkFunc;

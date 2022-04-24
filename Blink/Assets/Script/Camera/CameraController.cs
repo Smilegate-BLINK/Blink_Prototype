@@ -57,6 +57,11 @@ public class CameraController : MonoBehaviour
         myCamera.transform.position = myPlayer.transform.position + new Vector3(initialPosX, initialPosY, camearDepth);
     }
 
+    public void SetCameraPos(Vector2 prevPos)
+    {
+        myCamera.transform.position = new Vector3(prevPos.x, prevPos.y, camearDepth);
+    }
+
     // 플레이어가 걸어 이동할 때 시행되는 카메라 움직임
     private void moveCamera()
     {
@@ -65,13 +70,16 @@ public class CameraController : MonoBehaviour
         camPos = myCamera.transform.position;
 
         if (playerPos.x - camPos.x >= xScreenHalfSize - offset)
-            camPos += new Vector3((xScreenHalfSize - offset) * 2, 0, camearDepth);
+            camPos += new Vector3((xScreenHalfSize - offset) * 2, 0, 0);
         if (playerPos.x - camPos.x <= -(xScreenHalfSize - offset))
-            camPos += new Vector3(-(xScreenHalfSize - offset) * 2, 0, camearDepth);
+            camPos += new Vector3(-(xScreenHalfSize - offset) * 2, 0, 0);
         if (playerPos.y - camPos.y >= yScreenHalfSize - offset)
-            camPos += new Vector3(0, (yScreenHalfSize - offset) * 2, camearDepth);
+            camPos += new Vector3(0, (yScreenHalfSize - offset) * 2, 0);
         if (playerPos.y - camPos.y <= -(yScreenHalfSize - offset))
-            camPos += new Vector3(0, -(yScreenHalfSize - offset) * 2, camearDepth);
+            camPos += new Vector3(0, -(yScreenHalfSize - offset) * 2, 0);
+        if (camPos.y < 2.8f)
+            camPos.y = 2.8f;
+        camPos.z = camearDepth;
         myCamera.transform.position = camPos;
     }
 }
