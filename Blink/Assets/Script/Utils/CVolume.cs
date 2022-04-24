@@ -22,6 +22,7 @@ public class CVolume : MonoBehaviour
         for(int i =0;i<slider.Count;++i)
         {
             slider[i].value = volumeSetting[VolumeSetting.VolumeType[i]];
+            print(string.Format("{0} - {1}", VolumeSetting.VolumeType[i], volumeSetting[VolumeSetting.VolumeType[i]]));
         }
     }
 
