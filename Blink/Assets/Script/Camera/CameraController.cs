@@ -46,7 +46,6 @@ public class CameraController : MonoBehaviour
     private void LateUpdate()
     {
         moveCamera();
-        //changeBackGround();
     }
 
     // 플레이어가 순간이동할 때 시행되는 카메라 움직임
@@ -64,20 +63,12 @@ public class CameraController : MonoBehaviour
 
         if (playerPos.x - camPos.x > xScreenHalfSize)
             camPos += new Vector3(xScreenHalfSize * 2, 0, camearDepth);
-        else if (playerPos.x - camPos.x < -xScreenHalfSize)
+        if (playerPos.x - camPos.x < -xScreenHalfSize)
             camPos += new Vector3(-xScreenHalfSize * 2, 0, camearDepth);
-        else if (playerPos.y - camPos.y > yScreenHalfSize)
+        if (playerPos.y - camPos.y > yScreenHalfSize)
             camPos += new Vector3(0, yScreenHalfSize * 2, camearDepth);
-        else if (playerPos.y - camPos.y < -yScreenHalfSize)
+        if (playerPos.y - camPos.y < -yScreenHalfSize)
             camPos += new Vector3(0, -yScreenHalfSize * 2, camearDepth);
         myCamera.transform.position = camPos;
-    }
-
-    private void changeBackGround()
-    { 
-        if (WorldController.Instance.getWorldBlackOut())
-            myCamera.backgroundColor = Color.black;
-        else
-            myCamera.backgroundColor = Color.white;
     }
 }
