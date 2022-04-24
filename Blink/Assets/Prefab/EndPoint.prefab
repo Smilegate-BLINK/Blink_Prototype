@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2242321565457045908}
   - component: {fileID: 7863027545755612757}
   - component: {fileID: 7744816527156154513}
+  - component: {fileID: 2673668551923482423}
   m_Layer: 0
   m_Name: EndPoint
   m_TagString: Untagged
@@ -131,3 +132,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2673668551923482423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2242321565457045909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35e295f240f7c294887226b55663d1c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eyeOpenMat: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  eyeCloseMat: {fileID: 2100000, guid: a519c43dc27ecb0429b9499dfd2cab89, type: 2}
+  isChanged: 0

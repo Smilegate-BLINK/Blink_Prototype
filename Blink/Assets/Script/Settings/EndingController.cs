@@ -38,7 +38,7 @@ public class EndingController : MonoBehaviour
                 break;
             }
         }
-
+        yield return new WaitForSeconds(3f);
         while (true)
         {
             yield return null;
@@ -50,6 +50,7 @@ public class EndingController : MonoBehaviour
                 break;
             }
         }
+        yield return new WaitForSeconds(3f);
         SceneManager.LoadScene("MainScene");
     }
 }
