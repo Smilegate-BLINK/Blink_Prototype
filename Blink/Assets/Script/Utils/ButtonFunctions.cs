@@ -38,6 +38,8 @@ public class ButtonFunctions : MonoBehaviour
 
     public void Go2MainScene()
     {
+        if (Time.timeScale != 1f)
+            Time.timeScale = 1f;
         SceneManager.LoadScene("MainScene");
     }
 

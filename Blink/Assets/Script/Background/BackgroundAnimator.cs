@@ -10,12 +10,19 @@ public class BackgroundAnimator : MonoBehaviour
     public List<Sprite> backgroundImages;
     private Image backImage;
     public GameObject buttons;
+    private LogoAnimator logoAnimator;
+
+    private void Awake()
+    {
+        logoAnimator = transform.parent.Find("LogoImage").GetComponent<LogoAnimator>();
+        backImage = GetComponent<Image>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        backImage = GetComponent<Image>();
         backImage.enabled = false;
-        LogoAnimator logoAnimator = transform.parent.Find("LogoImage").GetComponent<LogoAnimator>();
+        
         logoAnimator.EventAnimationEnd += new EventHandler(OnEnableBackground);
         logoAnimator.StartAnimation();
     }
