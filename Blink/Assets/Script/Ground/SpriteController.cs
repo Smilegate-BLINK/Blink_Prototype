@@ -13,10 +13,14 @@ public class SpriteController : MonoBehaviour
     [SerializeField]
     private bool isChanged;
 
+    private void Awake()
+    {
+        mySprite = GetComponent<SpriteRenderer>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        mySprite = GetComponent<SpriteRenderer>();
         mySprite.material = eyeOpenMat;
         isChanged = false;
     }
