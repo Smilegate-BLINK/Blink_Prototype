@@ -88,9 +88,17 @@ public class VolumeSetting : MonoBehaviour
         volumes[VolumeType[2]] = (int)value;
     }
 
-    private void OnDisable()
+    private void OnApplicationQuit()
     {
         var jsonData = JsonConvert.SerializeObject(volumes);
+        print(jsonData);
+        GameManager.instance.fileIOHelper.CreateJsonFile(Application.streamingAssetsPath + "/DataFiles", "VolumeSetting", jsonData);
+    }
+
+    private void OnDestroy()
+    {
+        var jsonData = JsonConvert.SerializeObject(volumes);
+        print(jsonData);
         GameManager.instance.fileIOHelper.CreateJsonFile(Application.streamingAssetsPath + "/DataFiles", "VolumeSetting", jsonData);
     }
 }

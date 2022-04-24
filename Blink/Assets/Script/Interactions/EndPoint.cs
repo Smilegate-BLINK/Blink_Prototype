@@ -12,7 +12,10 @@ public class EndPoint : MonoBehaviour, IInteraction
 
     IEnumerator MoveToEndScene()
     {
-        Fade.Instance.FadeOut();
+        if(Fade.Instance)
+        {
+            Fade.Instance.FadeOut();
+        }
         yield return new WaitForSeconds(1.5f);
         SceneManager.LoadScene("EndingScene");
     }

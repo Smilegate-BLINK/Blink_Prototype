@@ -1,30 +1,44 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LogoAnimator : MonoBehaviour
 {
     private Animator animator;
-    [SerializeField]
-    private GameObject backgroundObject;
+    private Image image;
+    public event EventHandler EventAnimationEnd;
     void Awake()
     {
         animator = GetComponent<Animator>();
+        image = GetComponent<Image>();
+        animator.speed = 0f;
     }
 
+    //------------------------------------------------------------------------------------
     void Update()
     {
         if(animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f)
         {
             animator.speed = 0f;
-            StartCoroutine(EnableBackground());
+            if(EventAnimationEnd != null)
+            {
+                EventAnimationEnd(gameObject, EventArgs.Empty);
+            }
         }
     }
 
-    private IEnumerator EnableBackground()
+    //------------------------------------------------------------------------------------
+    public void StartAnimation()
     {
-        yield return new WaitForSeconds(1f);
-        gameObject.SetActive(false);
-        backgroundObject.SetActive(true);
+        animator.speed = 1f;
+    }
+
+    //------------------------------------------------------------------------------------
+    public void SetComponentState(bool isAble)
+    {
+        animator.enabled = isAble;
+        image.enabled = isAble;
     }
 }

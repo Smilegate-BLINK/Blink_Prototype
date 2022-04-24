@@ -64,6 +64,11 @@ void Start()
         UIManager.instance.ChangeScreenResolution(DefaultResolution[resolutionIndex], screenMode);
     }
 
+    private void OnDestroy()
+    {
+        var jsonData = JsonConvert.SerializeObject(userResolution);
+        GameManager.instance.fileIOHelper.CreateJsonFile(Application.streamingAssetsPath + "/DataFiles", "ResolutionSetting", jsonData);
+    }
     private void OnDisable()
     {
         var jsonData = JsonConvert.SerializeObject(userResolution);

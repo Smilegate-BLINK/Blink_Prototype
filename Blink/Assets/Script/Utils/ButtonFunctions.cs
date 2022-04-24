@@ -8,13 +8,13 @@ public class ButtonFunctions : MonoBehaviour
     public GameObject CreditUI;
     public void LoadNewGame()
     {
-        SceneManager.LoadSceneAsync("PlayerWorld");
+        SceneManager.LoadSceneAsync("LevelDesign");
     }
 
     public void LoadContinueGame()
     {
         GameManager.instance.isNewGame = false;
-        SceneManager.LoadSceneAsync("PlayerWorld");
+        SceneManager.LoadSceneAsync("LevelDesign");
     }
 
     public void LoadSettingUI()
@@ -36,11 +36,16 @@ public class ButtonFunctions : MonoBehaviour
 #endif
     }
 
+    public void Go2MainScene()
+    {
+        SceneManager.LoadScene("MainScene");
+    }
+
     public void QuitSetting()
     {
         GameManager.instance.keySetting.CheckKeyOverlap();
         UIManager.instance.SetActiveSettingUI(false);
-        if(SceneManager.GetActiveScene().name == "PlayerWorld")
+        if(SceneManager.GetActiveScene().name == "LevelDesign")
         {
             WorldController.Instance.ExitSetting();
         }
