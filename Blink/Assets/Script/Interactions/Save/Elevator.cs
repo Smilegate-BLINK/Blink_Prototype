@@ -30,20 +30,22 @@ public class Elevator : MonoBehaviour, IInteraction
     {
         if (target.tag == "Player")
         {
+            if (WorldController.Instance.savePoints[myPlayer.tempSaveSpot].isFixed == true && myPlayer.tempSaveSpot < WorldController.Instance.hightestSpot)
+            {
+                WorldController.Instance.playerCanMove = false;
+                Fade.Instance.FadeOut();
+                myPlayer.tempSaveSpot = WorldController.Instance.hightestSpot;
+                Debug.Log("Move to Highest SavePoint");
+                myPlayer.publicFadeIn();
+            }
             if (WorldController.Instance.savePoints[myPlayer.tempSaveSpot].isFixed == false)
             {
                 PlayerController2 myPlayer = target.GetComponent<PlayerController2>();
                 WorldController.Instance.saveSpot = myPlayer.tempSaveSpot;
                 WorldController.Instance.savePoints[myPlayer.tempSaveSpot].isFixed = true;
+                if (WorldController.Instance.hightestSpot < WorldController.Instance.saveSpot)
+                    WorldController.Instance.hightestSpot = WorldController.Instance.saveSpot;
                 Debug.Log("Saved Successfully");
-            }
-            if (WorldController.Instance.savePoints[myPlayer.tempSaveSpot].isFixed == true && myPlayer.tempSaveSpot != WorldController.Instance.saveSpot)
-            {
-                WorldController.Instance.playerCanMove = false;
-                Fade.Instance.FadeOut();
-                myPlayer.tempSaveSpot = WorldController.Instance.saveSpot;
-                Debug.Log("Move to Highest SavePoint");
-                myPlayer.publicFadeIn();
             }
         }
     }
