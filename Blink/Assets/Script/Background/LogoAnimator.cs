@@ -32,6 +32,7 @@ public class LogoAnimator : MonoBehaviour
     //------------------------------------------------------------------------------------
     public void StartAnimation()
     {
+        Debug.Log(animator.speed);
         animator.speed = 1f;
     }
 

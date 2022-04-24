@@ -23,7 +23,8 @@ public class Fade : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        fadeTime = WorldController.Instance.fadingTime;
+        if (WorldController.Instance != null)
+            fadeTime = WorldController.Instance.fadingTime;
     }
 
     public void FadeIn()
