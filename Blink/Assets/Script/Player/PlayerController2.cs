@@ -151,18 +151,6 @@ public class PlayerController2 : MonoBehaviour
         if (myRigid.velocity.x > 0.1f && transform.localScale.x < 0f)
             transform.localScale = transform.localScale - new Vector3(transform.localScale.x * 2, 0f, 0f);
 
-        if (myGround.canMove && horizontal == 0)
-        {
-            myAnim.SetBool("isWalking", false);
-            myBlink.walking = false;
-        }
-            
-        if (myGround.canMove && horizontal != 0)
-        {
-            myAnim.SetBool("isWalking", true);
-            myBlink.walking = true;
-        }
-
         if (myGround.isGrounded || myGround.isSlippered)
             myAnim.SetBool("isJumping", false);
         else
@@ -177,11 +165,31 @@ public class PlayerController2 : MonoBehaviour
             myAnim.SetBool("isHolding", true);
             myBlink.holding = true;
         }
-        if (myGround.isSloped)
+        if (myGround.isSloped && myRigid.velocity.y != 0f)
         {
             myAnim.SetBool("isSliding", true);
             myBlink.sliding = true;
         }
+        else if (myGround.isSloped && myRigid.velocity.y == 0f)
+        {
+            myAnim.SetBool("isJumping", false);
+            myAnim.SetBool("isWalking", false);
+            myBlink.sliding = false;
+            myBlink.walking = false;
+        }
+
+        if (myGround.canMove && horizontal == 0)
+        {
+            myAnim.SetBool("isWalking", false);
+            myBlink.walking = false;
+        }
+
+        if (myGround.canMove && horizontal != 0)
+        {
+            myAnim.SetBool("isWalking", true);
+            myBlink.walking = true;
+        }
+
     }
 
     // 플레이어가 강제 이동(건물 내부 이동 등)을 당하는 상황일 때 호출되는 함수.

@@ -367,7 +367,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 4
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: bf6fb214e54d5334ea3b078c133662e7, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
@@ -454,7 +454,7 @@ AudioSource:
   m_GameObject: {fileID: 7260623418375485265}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 1022053558652564747, guid: 995f713c7b8769e488a083b53a9edf89, type: 2}
   m_audioClip: {fileID: 8300000, guid: a1364cf6b08ce0d49970b1fa348a67b1, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -550,7 +550,7 @@ AudioSource:
   m_GameObject: {fileID: 7260623418375485265}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 1022053558652564747, guid: 995f713c7b8769e488a083b53a9edf89, type: 2}
   m_audioClip: {fileID: 8300000, guid: 050869fc04aea8d41bb390dc0bd69f8f, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.1
@@ -646,7 +646,7 @@ AudioSource:
   m_GameObject: {fileID: 7260623418375485265}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 1022053558652564747, guid: 995f713c7b8769e488a083b53a9edf89, type: 2}
   m_audioClip: {fileID: 8300000, guid: 902a984c52081ba4e99c0facf470440b, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.1
