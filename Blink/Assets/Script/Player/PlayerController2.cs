@@ -58,6 +58,8 @@ public class PlayerController2 : MonoBehaviour
         else
             transform.position = WorldController.Instance.savePoints[0].transform.position;
         CameraController.Instance.SetCameraPos();
+        speed = 6f;
+        jumpForce = 12f;
     }
 
     // Update is called once per frame
@@ -97,16 +99,17 @@ public class PlayerController2 : MonoBehaviour
     // 움직임 구현 함수
     private void Move()
     {
+        // 이 오브젝트가 움직일 수 있거나, 움직일 수 없지만 y축으로 움직이지 않으면 좌우 움직임 가능
+        if (myGround.canMove || (!myGround.canMove && myRigid.velocity.y == 0f && !myWall.hitWall))
+            myRigid.AddForce(new Vector2(horizontal * speed * 5, 0f), ForceMode2D.Force);
+
         if (myRigid.velocity.x > speed)
             myRigid.velocity = new Vector2(speed, myRigid.velocity.y);
         else if (myRigid.velocity.x < -speed)
             myRigid.velocity = new Vector2(-speed, myRigid.velocity.y);
 
         DoWallJump(horizontal);
-        // 이 오브젝트가 움직일 수 있거나, 움직일 수 없지만 y축으로 움직이지 않으면 좌우 움직임 가능
-        if (myGround.canMove || (!myGround.canMove && myRigid.velocity.y == 0f && !myWall.hitWall))
-            myRigid.AddForce(new Vector2(horizontal * speed, 0f));
-
+        
         // 점프 및 점프키 누름 정도에 따라 점프력 결정
         if (myGround.canJump && Input.GetKeyDown(keySetting.UserKey[KeyAction.JUMP]))
         {
