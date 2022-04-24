@@ -10,6 +10,9 @@ public class CameraController : MonoBehaviour
 
     private Vector3 camPos;
     private Vector2 playerPos;
+
+    private float offset = 0.2f;
+
     private float xScreenHalfSize;
     private float yScreenHalfSize;
     private float camearDepth = -10f;
@@ -61,14 +64,14 @@ public class CameraController : MonoBehaviour
         playerPos = myPlayer.position;
         camPos = myCamera.transform.position;
 
-        if (playerPos.x - camPos.x > xScreenHalfSize)
-            camPos += new Vector3(xScreenHalfSize * 2, 0, camearDepth);
-        if (playerPos.x - camPos.x < -xScreenHalfSize)
-            camPos += new Vector3(-xScreenHalfSize * 2, 0, camearDepth);
-        if (playerPos.y - camPos.y > yScreenHalfSize)
-            camPos += new Vector3(0, yScreenHalfSize * 2, camearDepth);
-        if (playerPos.y - camPos.y < -yScreenHalfSize)
-            camPos += new Vector3(0, -yScreenHalfSize * 2, camearDepth);
+        if (playerPos.x - camPos.x >= xScreenHalfSize - offset)
+            camPos += new Vector3((xScreenHalfSize - offset) * 2, 0, camearDepth);
+        if (playerPos.x - camPos.x <= -(xScreenHalfSize - offset))
+            camPos += new Vector3(-(xScreenHalfSize - offset) * 2, 0, camearDepth);
+        if (playerPos.y - camPos.y >= yScreenHalfSize - offset)
+            camPos += new Vector3(0, (yScreenHalfSize - offset) * 2, camearDepth);
+        if (playerPos.y - camPos.y <= -(yScreenHalfSize - offset))
+            camPos += new Vector3(0, -(yScreenHalfSize - offset) * 2, camearDepth);
         myCamera.transform.position = camPos;
     }
 }
