@@ -11,6 +11,9 @@ public class Elevator : MonoBehaviour, IInteraction
     public Sprite closedElevator;
     public Sprite opendElevator;
 
+    public AudioSource elevatorFix;
+    public AudioSource elevatorUp;
+
     private void Start()
     {
         mySprite = GetComponent<SpriteRenderer>();
@@ -32,6 +35,7 @@ public class Elevator : MonoBehaviour, IInteraction
         {
             if (WorldController.Instance.savePoints[myPlayer.tempSaveSpot].isFixed == true && myPlayer.tempSaveSpot < WorldController.Instance.hightestSpot)
             {
+                elevatorUp.Play();
                 WorldController.Instance.playerCanMove = false;
                 Fade.Instance.FadeOut();
                 myPlayer.tempSaveSpot = WorldController.Instance.hightestSpot;
@@ -40,6 +44,7 @@ public class Elevator : MonoBehaviour, IInteraction
             }
             if (WorldController.Instance.savePoints[myPlayer.tempSaveSpot].isFixed == false)
             {
+                elevatorFix.Play();
                 PlayerController2 myPlayer = target.GetComponent<PlayerController2>();
                 WorldController.Instance.saveSpot = myPlayer.tempSaveSpot;
                 WorldController.Instance.savePoints[myPlayer.tempSaveSpot].isFixed = true;
