@@ -13,8 +13,6 @@ public class CameraController : MonoBehaviour
 
     private float offset = 0.2f;
 
-    private float xScreenHalfSize;
-    private float yScreenHalfSize;
     private float camearDepth = -10f;
 
     private Transform myPlayer;
@@ -39,8 +37,6 @@ public class CameraController : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        yScreenHalfSize = myCamera.orthographicSize;
-        xScreenHalfSize = myCamera.aspect * yScreenHalfSize;
         camearDepth = myCamera.transform.position.z;
         SetCameraPos();
     }
@@ -69,14 +65,14 @@ public class CameraController : MonoBehaviour
         playerPos = myPlayer.position;
         camPos = myCamera.transform.position;
 
-        if (playerPos.x - camPos.x >= xScreenHalfSize - offset)
-            camPos += new Vector3((xScreenHalfSize - offset) * 2, 0, 0);
-        if (playerPos.x - camPos.x <= -(xScreenHalfSize - offset))
-            camPos += new Vector3(-(xScreenHalfSize - offset) * 2, 0, 0);
-        if (playerPos.y - camPos.y >= yScreenHalfSize - offset)
-            camPos += new Vector3(0, (yScreenHalfSize - offset) * 2, 0);
-        if (playerPos.y - camPos.y <= -(yScreenHalfSize - offset))
-            camPos += new Vector3(0, -(yScreenHalfSize - offset) * 2, 0);
+        if (playerPos.x - camPos.x >= myCamera.aspect * myCamera.orthographicSize - offset)
+            camPos += new Vector3((myCamera.aspect * myCamera.orthographicSize - offset) * 2, 0, 0);
+        if (playerPos.x - camPos.x <= -(myCamera.aspect * myCamera.orthographicSize - offset))
+            camPos += new Vector3(-(myCamera.aspect * myCamera.orthographicSize - offset) * 2, 0, 0);
+        if (playerPos.y - camPos.y >= myCamera.orthographicSize - offset)
+            camPos += new Vector3(0, (myCamera.orthographicSize - offset) * 2, 0);
+        if (playerPos.y - camPos.y <= -(myCamera.orthographicSize - offset))
+            camPos += new Vector3(0, -(myCamera.orthographicSize - offset) * 2, 0);
         if (camPos.y < 2.8f)
             camPos.y = 2.8f;
         camPos.z = camearDepth;
