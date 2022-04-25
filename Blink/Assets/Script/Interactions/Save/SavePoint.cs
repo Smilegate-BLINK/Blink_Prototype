@@ -9,6 +9,8 @@ public class SavePoint : MonoBehaviour, IInteraction
     public bool isFixed;
     public bool isStartPoint;
 
+    public AudioSource doorOpen;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +29,8 @@ public class SavePoint : MonoBehaviour, IInteraction
             PlayerController2 myPlayer = target.GetComponent<PlayerController2>();
             if (myPlayer != null)
             {
+                if (doorOpen != null)
+                    doorOpen.Play();
                 myPlayer.tempSaveSpot = spotNumber;
                 myPlayer.MovetoSpot(insideBuilding.position);
                 Invoke("AvoidBlinkFunc", WorldController.Instance.fadingTime);
