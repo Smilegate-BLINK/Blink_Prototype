@@ -8,6 +8,7 @@ public class ButtonFunctions : MonoBehaviour
     public GameObject CreditUI;
     public void LoadNewGame()
     {
+        GameManager.instance.isNewGame = true;
         SceneManager.LoadSceneAsync("LevelDesign");
     }
 
