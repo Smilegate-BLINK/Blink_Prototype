@@ -12,6 +12,6 @@ public class PlayerInfo
     }
     public PlayerInfo(PlayerController2 player)
     {
-        saveSpot = WorldController.Instance.saveSpot;
+        saveSpot = WorldController.Instance.hightestSpot;
     }
 }
