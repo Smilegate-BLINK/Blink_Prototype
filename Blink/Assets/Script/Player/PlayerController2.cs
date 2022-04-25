@@ -47,9 +47,11 @@ public class PlayerController2 : MonoBehaviour
     {
         if (!GameManager.instance.isNewGame)
         {
-            string fName = string.Format(Application.streamingAssetsPath + "/DataFiles", "PlayerInfo");
+            string fName = string.Format("{0}/{1}.json", Application.streamingAssetsPath + "/DataFiles", "PlayerInfo");
+            Debug.Log(fName);
             if (File.Exists(fName))
             {
+                Debug.Log("file exist");
                 PlayerInfo info = GameManager.instance.fileIOHelper.LoadJsonFile<PlayerInfo>(Application.streamingAssetsPath + "/DataFiles", "PlayerInfo");
                 WorldController.Instance.hightestSpot = info.saveSpot;
                 transform.position = WorldController.Instance.savePoints[info.saveSpot].transform.position;

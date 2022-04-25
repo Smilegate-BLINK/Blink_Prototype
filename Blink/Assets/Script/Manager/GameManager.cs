@@ -20,26 +20,25 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
-            SceneManager.sceneLoaded += Init;
+            Init();
             DontDestroyOnLoad(gameObject);
         }
         else
         {
             Destroy(gameObject);
         }
-    }
-
-    private void Init(Scene scene, LoadSceneMode mode)
-    {
-        fileIOHelper = new FileIOHelper();
-        isNewGame = true;
 
         //세팅 값 불러오기
         keySetting = FindObjectOfType<KeySetting>();
         volumeSetting = FindObjectOfType<VolumeSetting>();
         resolutionSetting = FindObjectOfType<ResolutionSetting>();
+    }
+
+    void Init()
+    {
+        fileIOHelper = new FileIOHelper();
     }
 }
